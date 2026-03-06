@@ -18,6 +18,14 @@
 
 <body>
 
+    <!-- ── INTRO OVERLAY ── -->
+    <div id="intro" role="status" aria-label="로딩 중">
+        <div class="intro-arc"></div>
+        <div class="intro-arc-2"></div>
+        <p class="intro-word fade-in" id="intro-word">"Hello, World!"</p>
+        <span class="intro-num" id="intro-num">01 / 07</span>
+    </div>
+
     <!-- ── HEADER ── -->
     <header>
         <a href="/" class="header-logo" id="logo">
@@ -140,6 +148,64 @@
             </nav>
         </div>
     </footer>
+
+    <script>
+        (function () {
+            const words = [
+                '"Hello, World!"',
+                '"Bonjour"',
+                '"Ciao"',
+                '"Olá"',
+                '"Hola"',
+                '"こんにちは"',
+                '"안녕하세요"',
+            ];
+
+            const el = document.getElementById('intro-word');
+            const numEl = document.getElementById('intro-num');
+            const overlay = document.getElementById('intro');
+
+            let index = 0;
+            const DISPLAY_MS = 260;
+            const FADE_MS = 150;
+
+            function showNext() {
+                if (index >= words.length) {
+                    // 모두 보여준 후 페이드아웃
+                    el.classList.add('fade-out');
+                    setTimeout(function () {
+                        overlay.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }, 700);
+                    return;
+                }
+
+                // fade out
+                el.classList.remove('fade-in');
+                el.classList.add('fade-out');
+
+                setTimeout(function () {
+                    el.textContent = words[index];
+                    numEl.textContent =
+                        String(index + 1).padStart(2, '0') + ' / ' + String(words.length).padStart(2, '0');
+                    index++;
+
+                    // fade in
+                    el.classList.remove('fade-out');
+                    el.classList.add('fade-in');
+
+                    setTimeout(showNext, DISPLAY_MS);
+                }, FADE_MS);
+            }
+
+            // 스크롤 잠금
+            document.body.style.overflow = 'hidden';
+
+            // 첫 언어는 이미 표시되어 있으므로 인덱스 1부터 시작
+            index = 1;
+            setTimeout(showNext, DISPLAY_MS);
+        })();
+    </script>
 
 </body>
 

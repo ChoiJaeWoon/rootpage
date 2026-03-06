@@ -1,5 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
 
+/* ── INTRO OVERLAY ── */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #040d1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+  overflow: hidden;
+}
+
+#intro.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-arc {
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.intro-arc-2 {
+  position: absolute;
+  bottom: -160px;
+  left: -160px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.intro-word {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  text-align: center;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  user-select: none;
+}
+
+.intro-word.fade-out {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.intro-word.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-num {
+  position: absolute;
+  bottom: 40px;
+  right: 48px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.18);
+  letter-spacing: 0.12em;
+}
+
 *,
 *::before,
 *::after {
