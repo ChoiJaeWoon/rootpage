@@ -55,13 +55,9 @@
                 직접 만든 서비스들을 통해 아이디어를 현실로 구현합니다.
             </p>
             <div class="hero-actions">
-                <a href="#projects" class="btn-primary" id="btn-view-projects">
-                    프로젝트 보기 ↓
-                </a>
+                <a href="#projects" class="btn-primary" id="btn-view-projects">프로젝트 보기 ↓</a>
                 <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener" class="btn-secondary"
-                    id="btn-github">
-                    GitHub 방문
-                </a>
+                    id="btn-github">GitHub 방문</a>
             </div>
         </div>
         <div class="hero-avatar" aria-hidden="true">🧑‍💻</div>
@@ -76,7 +72,6 @@
             </div>
             <div class="section-line"></div>
         </div>
-
         <div class="skills-grid">
             <div class="skill-chip" id="skill-python">
                 <span class="skill-icon">🐍</span>
@@ -108,7 +103,6 @@
             </div>
             <div class="section-line"></div>
         </div>
-
         <div class="cards-grid">
             <a href="https://devpanda.nullpoint.cloud" class="card" target="_blank" rel="noopener noreferrer"
                 id="card-devpanda" aria-label="DevPanda 프로젝트 방문">
@@ -140,9 +134,7 @@
     <!-- ── FOOTER ── -->
     <footer>
         <div class="footer-inner">
-            <p class="footer-copy">
-                © 2026 <strong>최재웅</strong> · nullpoint.cloud
-            </p>
+            <p class="footer-copy">© 2026 <strong>최재웅</strong> · nullpoint.cloud</p>
             <nav class="footer-links" aria-label="푸터 링크">
                 <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener">GitHub</a>
                 <a href="#projects">Projects</a>
@@ -153,66 +145,71 @@
 
     <script>
         (function () {
-            /* ── Canvas setup ── */
-            const canvas = document.getElementById('intro-canvas');
-            const ctx = canvas.getContext('2d');
-            let W, H;
-            function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+            /* ── Canvas ── */
+            var canvas = document.getElementById('intro-canvas');
+            var ctx = canvas.getContext('2d');
+            var W, H;
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+            }
             resize();
             window.addEventListener('resize', resize);
 
-            /* ── Dot config ── */
-            const TOTAL = 48;
-            const CLR_A = '#2563eb';  // blue
-            const CLR_B = '#7c3aed';  // violet (every 6th dot)
-            const DOT_R = 3.6;
+            /* ── 설정 ── */
+            var TOTAL = 60;        // 원 위 도트 개수
+            var DOT_R = 3.0;       // 모든 도트 동일 사이즈 (소형)
+            var CLR = '#2563eb'; // 단색 (파랑)
+            var FILL_MS = 2800;      // 전체 원 채우기 시간 → 단어 사이클 총 시간과 맞춤
+            var FADE_MS = 160;       // 각 도트가 페이드인 되는 시간
             function getR() { return Math.min(W, H) * 0.20; }
 
-            // Fixed positions on circle, alpha starts at 0
-            const dots = Array.from({ length: TOTAL }, function (_, i) {
-                return {
-                    angle: -Math.PI / 2 + (i / TOTAL) * Math.PI * 2, // 12시 방향부터 시작
+            /* ── 도트 배열: 12시 방향부터 시계 방향으로 고정 위치 ── */
+            var dots = [];
+            for (var i = 0; i < TOTAL; i++) {
+                dots.push({
+                    angle: -Math.PI / 2 + (i / TOTAL) * Math.PI * 2,
                     alpha: 0,
-                    big: i % 6 === 0,
-                };
-            });
-
-            let visibleCount = 0;
-            let bursting = false;
-            let burstDots = [];
-            let rafId;
-
-            /* ── Reveal dots proportional to word progress ── */
-            function revealDots(wordIndex, totalWords) {
-                var target = Math.round(((wordIndex + 1) / totalWords) * TOTAL);
-                visibleCount = Math.min(target, TOTAL);
+                });
             }
 
-            /* ── Draw loop ── */
-            function draw() {
+            var startTime = performance.now();
+            var bursting = false;
+            var burstDots = [];
+            var rafId;
+
+            /* ── 드로우 루프 ── */
+            function draw(ts) {
                 ctx.clearRect(0, 0, W, H);
                 var cx = W / 2, cy = H / 2, R = getR();
 
                 if (!bursting) {
+                    var elapsed = ts - startTime;
+
                     for (var i = 0; i < TOTAL; i++) {
-                        var d = dots[i];
-                        if (i < visibleCount) d.alpha = Math.min(1, d.alpha + 0.09);
-                        if (d.alpha <= 0) continue;
-                        var x = cx + Math.cos(d.angle) * R;
-                        var y = cy + Math.sin(d.angle) * R;
+                        // 이 도트가 페이드인 시작하는 시각 (연속적으로 스케줄)
+                        var triggerAt = (i / TOTAL) * FILL_MS;
+                        var sinceAppear = elapsed - triggerAt;
+                        // 0→1 부드럽게 페이드인
+                        dots[i].alpha = Math.max(0, Math.min(1, sinceAppear / FADE_MS));
+                        if (dots[i].alpha <= 0) continue;
+
+                        var x = cx + Math.cos(dots[i].angle) * R;
+                        var y = cy + Math.sin(dots[i].angle) * R;
                         ctx.beginPath();
-                        ctx.arc(x, y, d.big ? DOT_R * 1.55 : DOT_R * 0.78, 0, Math.PI * 2);
-                        ctx.fillStyle = d.big ? CLR_B : CLR_A;
-                        ctx.globalAlpha = d.alpha * (d.big ? 0.92 : 0.55);
+                        ctx.arc(x, y, DOT_R, 0, Math.PI * 2);
+                        ctx.fillStyle = CLR;
+                        ctx.globalAlpha = dots[i].alpha * 0.8;
                         ctx.fill();
                     }
                 } else {
+                    /* 버스트 단계 */
                     var alive = false;
                     for (var j = 0; j < burstDots.length; j++) {
                         var p = burstDots[j];
                         p.x += p.vx; p.y += p.vy;
-                        p.vx *= 1.08; p.vy *= 1.08;
-                        p.alpha -= 0.036;
+                        p.vx *= 1.07; p.vy *= 1.07;
+                        p.alpha -= 0.034;
                         if (p.alpha > 0) {
                             alive = true;
                             ctx.beginPath();
@@ -224,46 +221,45 @@
                     }
                     if (!alive) { cancelAnimationFrame(rafId); return; }
                 }
+
                 ctx.globalAlpha = 1;
                 rafId = requestAnimationFrame(draw);
             }
+            rafId = requestAnimationFrame(draw);
 
-            /* ── Burst ── */
+            /* ── 버스트 트리거 ── */
             function triggerBurst() {
                 var cx = W / 2, cy = H / 2, R = getR();
                 burstDots = [];
-                // 궤도 위 도트들이 바깥으로 폭발
+                /* 원위 도트 → 바깥으로 */
                 for (var i = 0; i < TOTAL; i++) {
-                    var d = dots[i];
-                    var speed = 5 + Math.random() * 5;
+                    var speed = 4 + Math.random() * 5;
                     burstDots.push({
-                        x: cx + Math.cos(d.angle) * R,
-                        y: cy + Math.sin(d.angle) * R,
-                        vx: Math.cos(d.angle) * speed,
-                        vy: Math.sin(d.angle) * speed,
-                        r: d.big ? DOT_R * 1.55 : DOT_R * 0.78,
-                        alpha: 1,
-                        color: d.big ? CLR_B : CLR_A,
+                        x: cx + Math.cos(dots[i].angle) * R,
+                        y: cy + Math.sin(dots[i].angle) * R,
+                        vx: Math.cos(dots[i].angle) * speed,
+                        vy: Math.sin(dots[i].angle) * speed,
+                        r: DOT_R,
+                        alpha: dots[i].alpha,
+                        color: CLR,
                     });
                 }
-                // 중심에서 추가 파티클 폭발
-                for (var k = 0; k < 18; k++) {
+                /* 중심 파티클 */
+                for (var k = 0; k < 20; k++) {
                     var a = Math.random() * Math.PI * 2;
                     var s = 3 + Math.random() * 7;
                     burstDots.push({
                         x: cx, y: cy,
                         vx: Math.cos(a) * s, vy: Math.sin(a) * s,
-                        r: 2 + Math.random() * 2.5,
-                        alpha: 0.85,
-                        color: Math.random() > 0.5 ? CLR_A : CLR_B,
+                        r: 2 + Math.random() * 2,
+                        alpha: 0.8,
+                        color: Math.random() > 0.5 ? CLR : '#7c3aed',
                     });
                 }
                 bursting = true;
             }
 
-            rafId = requestAnimationFrame(draw);
-
-            /* ── Word cycling ── */
+            /* ── 단어 사이클 ── */
             var words = [
                 '"Hello, World!"',
                 '"Bonjour"',
@@ -273,23 +269,18 @@
                 '"こんにちは"',
                 '"안녕하세요"',
             ];
-            var TOTAL_WORDS = words.length;
-
+            var TOTAL_W = words.length;
             var el = document.getElementById('intro-word');
             var numEl = document.getElementById('intro-num');
             var overlay = document.getElementById('intro');
             var DISPLAY = 310;
             var FADE = 130;
-            var index = 0;
+            var idx = 1;
 
             document.body.style.overflow = 'hidden';
 
-            // 첫 단어(Hello, World!)는 이미 HTML에 표시 → 도트 첫 배치 즉시 reveal
-            revealDots(0, TOTAL_WORDS);
-
             function showNext() {
-                if (index >= TOTAL_WORDS) {
-                    // 안녕하세요까지 모두 보여준 후 → BURST!
+                if (idx >= TOTAL_W) {
                     el.classList.add('fade-out');
                     triggerBurst();
                     setTimeout(function () {
@@ -301,19 +292,16 @@
                 el.classList.remove('fade-in');
                 el.classList.add('fade-out');
                 setTimeout(function () {
-                    el.textContent = words[index];
+                    el.textContent = words[idx];
                     numEl.textContent =
-                        String(index + 1).padStart(2, '0') + ' / ' +
-                        String(TOTAL_WORDS).padStart(2, '0');
-                    revealDots(index, TOTAL_WORDS);
-                    index++;
+                        String(idx + 1).padStart(2, '0') + ' / ' +
+                        String(TOTAL_W).padStart(2, '0');
+                    idx++;
                     el.classList.remove('fade-out');
                     el.classList.add('fade-in');
                     setTimeout(showNext, DISPLAY);
                 }, FADE);
             }
-
-            index = 1;
             setTimeout(showNext, DISPLAY);
         })();
     </script>
