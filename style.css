@@ -624,6 +624,121 @@ footer {
   border-top: 1px solid var(--border);
 }
 
+/* ── LIKE BUTTON ── */
+.like-section {
+  padding: 20px 2.5rem 64px;
+}
+
+.like-wrapper {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  user-select: none;
+}
+
+.like-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  background: #fff5f5;
+  color: #ef4444;
+}
+
+.like-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.like-btn.liked {
+  background: #fff5f5;
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  cursor: default;
+}
+
+.like-btn:disabled {
+  opacity: 0.85;
+}
+
+.like-heart {
+  font-size: 1.4rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.like-heart.pop {
+  animation: heart-pop 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.7);
+  }
+
+  60% {
+    transform: scale(0.85);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.like-label {
+  font-size: 0.88rem;
+}
+
+.like-count-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.like-count {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.2s ease;
+}
+
+.like-count-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.like-hint {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 720px) {
   .hero {

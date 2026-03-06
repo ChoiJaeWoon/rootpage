@@ -131,6 +131,21 @@
         </div>
     </section>
 
+    <!-- ── LIKE BUTTON ── -->
+    <section class="like-section" aria-label="좋아요">
+        <div class="like-wrapper">
+            <button class="like-btn" id="like-btn" aria-label="좋아요 누르기" title="하루에 한 번 누를 수 있어요">
+                <span class="like-heart" id="like-heart">🤍</span>
+                <span class="like-label" id="like-label">이 페이지가 마음에 드셨나요?</span>
+            </button>
+            <div class="like-count-wrap">
+                <span class="like-count" id="like-count">0</span>
+                <span class="like-count-label">명이 좋아해요</span>
+            </div>
+            <p class="like-hint" id="like-hint">하루에 한 번 누를 수 있어요 ✨</p>
+        </div>
+    </section>
+
     <!-- ── FOOTER ── -->
     <footer>
         <div class="footer-inner">
@@ -303,6 +318,102 @@
                 }, FADE);
             }
             setTimeout(showNext, DISPLAY);
+        })();
+    </script>
+
+    <script>
+        /* ── LIKE BUTTON ── */
+        (function () {
+            var btn = document.getElementById('like-btn');
+            var heart = document.getElementById('like-heart');
+            var label = document.getElementById('like-label');
+            var countEl = document.getElementById('like-count');
+            var hint = document.getElementById('like-hint');
+
+            var STORAGE_KEY = 'nullpoint_like_count';
+            var DATE_KEY = 'nullpoint_like_date';
+
+            /* 저장된 카운트 불러오기 */
+            var count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+            countEl.textContent = count;
+
+            /* 오늘 이미 눌렀는지 확인 */
+            function getTodayStr() {
+                var d = new Date();
+                return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+            }
+
+            function hasLikedToday() {
+                return localStorage.getItem(DATE_KEY) === getTodayStr();
+            }
+
+            function setLikedState() {
+                btn.classList.add('liked');
+                heart.textContent = '❤️';
+                label.textContent = '좋아요! 감사합니다 😊';
+                hint.textContent = '내일 다시 누를 수 있어요';
+                btn.disabled = true;
+            }
+
+            /* 초기 상태 반영 */
+            if (hasLikedToday()) {
+                setLikedState();
+            }
+
+            /* 클릭 핸들러 */
+            btn.addEventListener('click', function () {
+                if (hasLikedToday()) return;
+
+                count++;
+                localStorage.setItem(STORAGE_KEY, count);
+                localStorage.setItem(DATE_KEY, getTodayStr());
+                countEl.textContent = count;
+
+                /* 하트 애니메이션 */
+                heart.classList.add('pop');
+                setTimeout(function () { heart.classList.remove('pop'); }, 400);
+
+                /* 파티클 이펙트 */
+                spawnHearts(btn);
+
+                setLikedState();
+            });
+
+            /* 미니 파티클 */
+            function spawnHearts(origin) {
+                var rect = origin.getBoundingClientRect();
+                var cx = rect.left + rect.width / 2;
+                var cy = rect.top + rect.height / 2;
+                var emojis = ['❤️', '🧡', '💛', '💜', '💙'];
+                for (var i = 0; i < 8; i++) {
+                    (function (i) {
+                        var span = document.createElement('span');
+                        span.textContent = emojis[i % emojis.length];
+                        span.style.cssText = [
+                            'position:fixed',
+                            'left:' + cx + 'px',
+                            'top:' + cy + 'px',
+                            'font-size:' + (14 + Math.random() * 10) + 'px',
+                            'pointer-events:none',
+                            'z-index:9999',
+                            'transform:translate(-50%,-50%)',
+                            'transition:none',
+                            'user-select:none',
+                        ].join(';');
+                        document.body.appendChild(span);
+                        var angle = (i / 8) * Math.PI * 2;
+                        var dist = 60 + Math.random() * 50;
+                        var tx = Math.cos(angle) * dist;
+                        var ty = Math.sin(angle) * dist - 30;
+                        requestAnimationFrame(function () {
+                            span.style.transition = 'transform 0.7s ease-out, opacity 0.7s ease-out';
+                            span.style.transform = 'translate(calc(-50% + ' + tx + 'px), calc(-50% + ' + ty + 'px))';
+                            span.style.opacity = '0';
+                        });
+                        setTimeout(function () { document.body.removeChild(span); }, 800);
+                    })(i);
+                }
+            }
         })();
     </script>
 
