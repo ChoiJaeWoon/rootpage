@@ -157,12 +157,12 @@
             window.addEventListener('resize', resize);
 
             /* ── 설정 ── */
-            var TOTAL = 60;        // 원 위 도트 개수
+            var TOTAL = 90;        // 원 위 도트 개수
             var DOT_R = 3.0;       // 모든 도트 동일 사이즈 (소형)
             var CLR = '#2563eb'; // 단색 (파랑)
             var FILL_MS = 2800;      // 전체 원 채우기 시간 → 단어 사이클 총 시간과 맞춤
             var FADE_MS = 160;       // 각 도트가 페이드인 되는 시간
-            function getR() { return Math.min(W, H) * 0.20; }
+            function getR() { return Math.min(W, H) * 0.13; }
 
             /* ── 도트 배열: 12시 방향부터 시계 방향으로 고정 위치 ── */
             var dots = [];
