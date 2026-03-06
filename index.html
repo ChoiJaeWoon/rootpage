@@ -322,7 +322,7 @@
     </script>
 
     <script>
-        /* ── LIKE BUTTON ── */
+        /* ── LIKE BUTTON (Firebase Realtime Database) ── */
         (function () {
             var btn = document.getElementById('like-btn');
             var heart = document.getElementById('like-heart');
@@ -330,14 +330,10 @@
             var countEl = document.getElementById('like-count');
             var hint = document.getElementById('like-hint');
 
-            var STORAGE_KEY = 'nullpoint_like_count';
             var DATE_KEY = 'nullpoint_like_date';
+            var DB_URL = 'https://devpanda-f04fa-default-rtdb.firebaseio.com/nullpoint_likes.json';
 
-            /* 저장된 카운트 불러오기 */
-            var count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-            countEl.textContent = count;
-
-            /* 오늘 이미 눌렀는지 확인 */
+            /* ── 오늘 날짜 문자열 ── */
             function getTodayStr() {
                 var d = new Date();
                 return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -355,31 +351,55 @@
                 btn.disabled = true;
             }
 
-            /* 초기 상태 반영 */
-            if (hasLikedToday()) {
-                setLikedState();
-            }
+            /* ── Firebase에서 현재 카운트 읽기 ── */
+            fetch(DB_URL)
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    var count = (data && typeof data.count === 'number') ? data.count : 0;
+                    countEl.textContent = count;
+                })
+                .catch(function () { countEl.textContent = '?'; });
 
-            /* 클릭 핸들러 */
+            /* ── 초기 상태 ── */
+            if (hasLikedToday()) setLikedState();
+
+            /* ── 클릭 핸들러 ── */
             btn.addEventListener('click', function () {
                 if (hasLikedToday()) return;
 
-                count++;
-                localStorage.setItem(STORAGE_KEY, count);
-                localStorage.setItem(DATE_KEY, getTodayStr());
-                countEl.textContent = count;
+                btn.disabled = true; /* 중복 클릭 방지 */
 
-                /* 하트 애니메이션 */
-                heart.classList.add('pop');
-                setTimeout(function () { heart.classList.remove('pop'); }, 400);
+                /* 현재 값 읽고 +1 저장 */
+                fetch(DB_URL)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        var newCount = ((data && typeof data.count === 'number') ? data.count : 0) + 1;
+                        return fetch(DB_URL, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ count: newCount })
+                        }).then(function () { return newCount; });
+                    })
+                    .then(function (newCount) {
+                        localStorage.setItem(DATE_KEY, getTodayStr());
+                        countEl.textContent = newCount;
 
-                /* 파티클 이펙트 */
-                spawnHearts(btn);
+                        /* 하트 애니메이션 */
+                        heart.classList.add('pop');
+                        setTimeout(function () { heart.classList.remove('pop'); }, 400);
 
-                setLikedState();
+                        /* 파티클 이펙트 */
+                        spawnHearts(btn);
+
+                        setLikedState();
+                    })
+                    .catch(function () {
+                        btn.disabled = false;
+                        hint.textContent = '오류가 발생했어요. 잠시 후 다시 시도해 주세요.';
+                    });
             });
 
-            /* 미니 파티클 */
+            /* ── 미니 파티클 ── */
             function spawnHearts(origin) {
                 var rect = origin.getBoundingClientRect();
                 var cx = rect.left + rect.width / 2;
