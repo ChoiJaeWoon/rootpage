@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="최재웅 — Backend Developer &amp; Student studying AI. nullpoint.cloud 개발 포트폴리오." />
-    <meta property="og:title" content="최재웅 — nullpoint.cloud" />
-    <meta property="og:description" content="Backend Developer &amp; Student studying AI" />
+    <meta name="description" content="nullpoint.cloud — 최재웅의 서비스 모음" />
+    <meta property="og:title" content="nullpoint.cloud" />
+    <meta property="og:description" content="최재웅의 서비스 모음" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nullpoint.cloud" />
-    <title>최재웅 — nullpoint.cloud</title>
+    <title>nullpoint.cloud</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9370602153477675"
@@ -34,102 +34,40 @@
             null<span class="dot">point</span>.cloud
         </a>
         <nav aria-label="메인 네비게이션">
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
             <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
         </nav>
     </header>
 
     <!-- ── HERO ── -->
-    <section class="hero" aria-labelledby="hero-name">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="status-dot"></span>
-                Available for opportunities
-            </div>
-            <h1 id="hero-name">최재웅</h1>
-            <span class="hero-name-en">Choi Jae-Woon</span>
-            <p class="hero-title">Backend Developer &amp; Student studying AI</p>
-            <p class="hero-desc">
-                백엔드 개발과 AI를 공부하고 있는 개발자입니다.<br />
-                직접 만든 서비스들을 통해 아이디어를 현실로 구현합니다.
-            </p>
-            <div class="hero-actions">
-                <a href="#projects" class="btn-primary" id="btn-view-projects">프로젝트 보기 ↓</a>
-                <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener" class="btn-secondary"
-                    id="btn-github">GitHub 방문</a>
-            </div>
-        </div>
-        <div class="hero-avatar" aria-hidden="true">🧑‍💻</div>
+    <section class="hub-hero">
+        <p class="hub-label">Made by 최재웅</p>
+        <h1 class="hub-title">null<span class="dot">point</span>.cloud</h1>
+        <p class="hub-desc">직접 만든 서비스들을 한 곳에서 모아봤어요.</p>
     </section>
 
-    <!-- ── SKILLS ── -->
-    <section class="section" id="skills" aria-labelledby="skills-title">
-        <div class="section-header">
-            <div>
-                <p class="section-label">Tech Stack</p>
-                <h2 class="section-title" id="skills-title">기술 스택</h2>
-            </div>
-            <div class="section-line"></div>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-chip" id="skill-python">
-                <span class="skill-icon">🐍</span>
-                <div>
-                    <div class="skill-name">Python</div>
-                    <div class="skill-level">Backend · AI/ML</div>
-                </div>
-            </div>
-            <div class="skill-chip" id="skill-java">
-                <span class="skill-icon">☕</span>
-                <div>
-                    <div class="skill-name">Java</div>
-                    <div class="skill-level">Backend · OOP</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- ── SERVICES ── -->
+    <main class="services-section" aria-label="서비스 목록">
+        <div class="services-grid">
 
-    <div class="divider">
-        <hr />
-    </div>
-
-    <!-- ── PROJECTS ── -->
-    <section class="section" id="projects" aria-labelledby="projects-title">
-        <div class="section-header">
-            <div>
-                <p class="section-label">Portfolio</p>
-                <h2 class="section-title" id="projects-title">프로젝트</h2>
-            </div>
-            <div class="section-line"></div>
-        </div>
-        <div class="cards-grid">
-            <a href="https://devpanda.nullpoint.cloud" class="card" target="_blank" rel="noopener noreferrer"
-                id="card-devpanda" aria-label="DevPanda 프로젝트 방문">
+            <a href="https://devpanda.nullpoint.cloud" class="service-card" target="_blank" rel="noopener noreferrer"
+                id="card-devpanda" aria-label="DevPanda 방문">
                 <div class="card-glow"></div>
-                <div class="card-header">
-                    <div class="card-icon">🐼</div>
-                    <span class="card-status status-live">● Live</span>
+                <div class="service-card-header">
+                    <div class="service-icon">🐼</div>
+                    <span class="service-status status-live">● Live</span>
                 </div>
-                <div>
-                    <div class="card-title">DevPanda</div>
-                </div>
-                <p class="card-desc">
-                    AI 기반 개발자 유틸리티 툴킷. 코드 변환, 포맷터, 인코더/디코더 등
-                    개발에 필요한 다양한 도구를 한 곳에서 제공합니다.
-                </p>
-                <div class="card-tags">
-                    <span class="tag">AI</span>
-                    <span class="tag">Developer Tools</span>
-                    <span class="tag">Utilities</span>
-                </div>
-                <div class="card-footer">
-                    <span class="card-url">devpanda.nullpoint.cloud</span>
-                    <span class="card-arrow">→</span>
+                <div class="service-name">DevPanda</div>
+                <p class="service-desc">AI 기반 개발자 유틸리티 툴킷. 코드 변환, 포맷터, 인코더/디코더 등 개발에 필요한 도구들.</p>
+                <div class="service-footer">
+                    <span class="service-url">devpanda.nullpoint.cloud</span>
+                    <span class="service-arrow">→</span>
                 </div>
             </a>
+
+            <!-- 추가 서비스 카드는 여기에 -->
+
         </div>
-    </section>
+    </main>
 
     <!-- ── LIKE BUTTON ── -->
     <section class="like-section" aria-label="좋아요">
@@ -167,13 +105,12 @@
         </div>
     </section>
 
-
+    <!-- ── FOOTER ── -->
     <footer>
         <div class="footer-inner">
             <p class="footer-copy">© 2026 <strong>최재웅</strong> · nullpoint.cloud</p>
             <nav class="footer-links" aria-label="푸터 링크">
                 <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener">GitHub</a>
-                <a href="#projects">Projects</a>
                 <a href="/ads.txt">ads.txt</a>
             </nav>
         </div>
@@ -192,15 +129,13 @@
             resize();
             window.addEventListener('resize', resize);
 
-            /* ── 설정 ── */
-            var TOTAL = 90;        // 원 위 도트 개수
-            var DOT_R = 3.0;       // 모든 도트 동일 사이즈 (소형)
-            var CLR = '#2563eb'; // 단색 (파랑)
-            var FILL_MS = 2800;      // 전체 원 채우기 시간 → 단어 사이클 총 시간과 맞춤
-            var FADE_MS = 160;       // 각 도트가 페이드인 되는 시간
+            var TOTAL = 90;
+            var DOT_R = 3.0;
+            var CLR = '#2563eb';
+            var FILL_MS = 2800;
+            var FADE_MS = 160;
             function getR() { return Math.min(W, H) * 0.17; }
 
-            /* ── 도트 배열: 12시 방향부터 시계 방향으로 고정 위치 ── */
             var dots = [];
             for (var i = 0; i < TOTAL; i++) {
                 dots.push({
@@ -214,22 +149,17 @@
             var burstDots = [];
             var rafId;
 
-            /* ── 드로우 루프 ── */
             function draw(ts) {
                 ctx.clearRect(0, 0, W, H);
                 var cx = W / 2, cy = H / 2, R = getR();
 
                 if (!bursting) {
                     var elapsed = ts - startTime;
-
                     for (var i = 0; i < TOTAL; i++) {
-                        // 이 도트가 페이드인 시작하는 시각 (연속적으로 스케줄)
                         var triggerAt = (i / TOTAL) * FILL_MS;
                         var sinceAppear = elapsed - triggerAt;
-                        // 0→1 부드럽게 페이드인
                         dots[i].alpha = Math.max(0, Math.min(1, sinceAppear / FADE_MS));
                         if (dots[i].alpha <= 0) continue;
-
                         var x = cx + Math.cos(dots[i].angle) * R;
                         var y = cy + Math.sin(dots[i].angle) * R;
                         ctx.beginPath();
@@ -239,7 +169,6 @@
                         ctx.fill();
                     }
                 } else {
-                    /* 버스트 단계 */
                     var alive = false;
                     for (var j = 0; j < burstDots.length; j++) {
                         var p = burstDots[j];
@@ -263,11 +192,9 @@
             }
             rafId = requestAnimationFrame(draw);
 
-            /* ── 버스트 트리거 ── */
             function triggerBurst() {
                 var cx = W / 2, cy = H / 2, R = getR();
                 burstDots = [];
-                /* 원위 도트 → 바깥으로 */
                 for (var i = 0; i < TOTAL; i++) {
                     var speed = 4 + Math.random() * 5;
                     burstDots.push({
@@ -275,35 +202,25 @@
                         y: cy + Math.sin(dots[i].angle) * R,
                         vx: Math.cos(dots[i].angle) * speed,
                         vy: Math.sin(dots[i].angle) * speed,
-                        r: DOT_R,
-                        alpha: dots[i].alpha,
-                        color: CLR,
+                        r: DOT_R, alpha: dots[i].alpha, color: CLR,
                     });
                 }
-                /* 중심 파티클 */
                 for (var k = 0; k < 20; k++) {
                     var a = Math.random() * Math.PI * 2;
                     var s = 3 + Math.random() * 7;
                     burstDots.push({
                         x: cx, y: cy,
                         vx: Math.cos(a) * s, vy: Math.sin(a) * s,
-                        r: 2 + Math.random() * 2,
-                        alpha: 0.8,
+                        r: 2 + Math.random() * 2, alpha: 0.8,
                         color: Math.random() > 0.5 ? CLR : '#7c3aed',
                     });
                 }
                 bursting = true;
             }
 
-            /* ── 단어 사이클 ── */
             var words = [
-                '"Hello, World!"',
-                '"Bonjour"',
-                '"Ciao"',
-                '"Olá"',
-                '"Hola"',
-                '"こんにちは"',
-                '"안녕하세요"',
+                '"Hello, World!"', '"Bonjour"', '"Ciao"',
+                '"Olá"', '"Hola"', '"こんにちは"', '"안녕하세요"',
             ];
             var TOTAL_W = words.length;
             var el = document.getElementById('intro-word');
@@ -354,7 +271,6 @@
             var DATE_KEY = 'nullpoint_like_date';
             var DB_URL = 'https://devpanda-f04fa-default-rtdb.asia-southeast1.firebasedatabase.app/nullpoint_likes.json';
 
-            /* ── 오늘 날짜 문자열 ── */
             function getTodayStr() {
                 var d = new Date();
                 return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -372,7 +288,6 @@
                 btn.disabled = true;
             }
 
-            /* ── Firebase에서 현재 카운트 읽기 ── */
             fetch(DB_URL)
                 .then(function (r) { return r.json(); })
                 .then(function (data) {
@@ -381,16 +296,11 @@
                 })
                 .catch(function () { countEl.textContent = '?'; });
 
-            /* ── 초기 상태 ── */
             if (hasLikedToday()) setLikedState();
 
-            /* ── 클릭 핸들러 ── */
             btn.addEventListener('click', function () {
                 if (hasLikedToday()) return;
-
-                btn.disabled = true; /* 중복 클릭 방지 */
-
-                /* 현재 값 읽고 +1 저장 */
+                btn.disabled = true;
                 fetch(DB_URL)
                     .then(function (r) { return r.json(); })
                     .then(function (data) {
@@ -404,14 +314,9 @@
                     .then(function (newCount) {
                         localStorage.setItem(DATE_KEY, getTodayStr());
                         countEl.textContent = newCount;
-
-                        /* 하트 애니메이션 */
                         heart.classList.add('pop');
                         setTimeout(function () { heart.classList.remove('pop'); }, 400);
-
-                        /* 파티클 이펙트 */
                         spawnHearts(btn);
-
                         setLikedState();
                     })
                     .catch(function () {
@@ -420,7 +325,6 @@
                     });
             });
 
-            /* ── 미니 파티클 ── */
             function spawnHearts(origin) {
                 var rect = origin.getBoundingClientRect();
                 var cx = rect.left + rect.width / 2;
@@ -431,15 +335,10 @@
                         var span = document.createElement('span');
                         span.textContent = emojis[i % emojis.length];
                         span.style.cssText = [
-                            'position:fixed',
-                            'left:' + cx + 'px',
-                            'top:' + cy + 'px',
+                            'position:fixed', 'left:' + cx + 'px', 'top:' + cy + 'px',
                             'font-size:' + (14 + Math.random() * 10) + 'px',
-                            'pointer-events:none',
-                            'z-index:9999',
-                            'transform:translate(-50%,-50%)',
-                            'transition:none',
-                            'user-select:none',
+                            'pointer-events:none', 'z-index:9999',
+                            'transform:translate(-50%,-50%)', 'transition:none', 'user-select:none',
                         ].join(';');
                         document.body.appendChild(span);
                         var angle = (i / 8) * Math.PI * 2;
@@ -476,11 +375,8 @@
                 return localStorage.getItem(VISIT_KEY) === getTodayStr();
             }
 
-            function formatNum(n) {
-                return n.toLocaleString();
-            }
+            function formatNum(n) { return n.toLocaleString(); }
 
-            /* ── 카운트 표시 ── */
             function loadCounts() {
                 fetch(BASE_URL + '.json')
                     .then(function (r) { return r.json(); })
@@ -491,27 +387,19 @@
                         totalEl.textContent = formatNum(total);
                         todayEl.textContent = formatNum(today);
                     })
-                    .catch(function () {
-                        totalEl.textContent = '—';
-                        todayEl.textContent = '—';
-                    });
+                    .catch(function () { totalEl.textContent = '—'; todayEl.textContent = '—'; });
             }
 
-            /* ── 방문 기록 ── */
             function recordVisit() {
                 var todayStr = getTodayStr();
-
-                /* 먼저 현재 값 읽기 */
                 fetch(BASE_URL + '.json')
                     .then(function (r) { return r.json(); })
                     .then(function (data) {
                         data = data || {};
                         var newTotal = (typeof data.total === 'number' ? data.total : 0) + 1;
                         var newToday = (typeof data[todayStr] === 'number' ? data[todayStr] : 0) + 1;
-
                         data.total = newTotal;
                         data[todayStr] = newToday;
-
                         return fetch(BASE_URL + '.json', {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
@@ -522,15 +410,10 @@
                             todayEl.textContent = formatNum(newToday);
                         });
                     })
-                    .catch(function () { /* 조용히 실패 */ });
+                    .catch(function () { });
             }
 
-            /* ── 실행 ── */
-            if (hasVisitedToday()) {
-                loadCounts();   /* 이미 카운트됐으면 그냥 읽기만 */
-            } else {
-                recordVisit();  /* 새 방문자면 +1 하고 저장 */
-            }
+            if (hasVisitedToday()) { loadCounts(); } else { recordVisit(); }
         })();
     </script>
 
