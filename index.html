@@ -1,91 +1,146 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="nullpoint.cloud — AI 개발자 툴과 유틸리티 서비스를 제공하는 포털 사이트입니다." />
-  <meta property="og:title" content="nullpoint.cloud" />
-  <meta property="og:description" content="AI 개발자 툴과 유틸리티 서비스 포털" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://nullpoint.cloud" />
-  <title>nullpoint.cloud — Developer Tools Portal</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9370602153477675"
-       crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="최재웅 — Backend Developer & Student studying AI. nullpoint.cloud 개발 포트폴리오." />
+    <meta property="og:title" content="최재웅 — nullpoint.cloud" />
+    <meta property="og:description" content="Backend Developer & Student studying AI" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nullpoint.cloud" />
+    <title>최재웅 — nullpoint.cloud</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9370602153477675"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
 
-  <!-- ── HEADER ── -->
-  <header>
-    <a href="/" class="header-logo" aria-label="nullpoint.cloud 홈">
-      <div class="logo-icon">⚡</div>
-      <span class="logo-text">null<span>point</span>.cloud</span>
-    </a>
-    <span class="header-badge">Developer Hub</span>
-  </header>
+    <!-- ── HEADER ── -->
+    <header>
+        <a href="/" class="header-logo" id="logo">
+            null<span class="dot">point</span>.cloud
+        </a>
+        <nav aria-label="메인 네비게이션">
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
+        </nav>
+    </header>
 
-  <!-- ── HERO ── -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-eyebrow">✦ Tools &amp; Utilities</div>
-    <h1 id="hero-title">
-      개발을 더 빠르게,<br />
-      <span class="highlight">nullpoint.cloud</span>
-    </h1>
-    <p>개발자를 위한 AI 툴킷과 유틸리티 서비스 모음입니다.<br />필요한 도구를 골라 바로 사용해 보세요.</p>
-  </section>
-
-  <!-- ── PROJECTS ── -->
-  <main class="section" id="projects">
-    <p class="section-label">서비스 목록</p>
-    <div class="cards-grid">
-
-      <!-- DevPanda Card -->
-      <a
-        href="https://devpanda.nullpoint.cloud"
-        class="card"
-        target="_blank"
-        rel="noopener noreferrer"
-        id="card-devpanda"
-        aria-label="DevPanda — AI & 개발자 유틸리티 툴킷 바로가기"
-      >
-        <div class="card-header">
-          <div class="card-emoji">🐼</div>
-          <div>
-            <div class="card-title">DevPanda</div>
-            <div class="card-subtitle">devpanda.nullpoint.cloud</div>
-          </div>
+    <!-- ── HERO ── -->
+    <section class="hero" aria-labelledby="hero-name">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="status-dot"></span>
+                Available for opportunities
+            </div>
+            <h1 id="hero-name">최재웅</h1>
+            <span class="hero-name-en">Choi Jae-Woon</span>
+            <p class="hero-title">Backend Developer &amp; Student studying AI</p>
+            <p class="hero-desc">
+                백엔드 개발과 AI를 공부하고 있는 개발자입니다.<br />
+                직접 만든 서비스들을 통해 아이디어를 현실로 구현합니다.
+            </p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn-primary" id="btn-view-projects">
+                    프로젝트 보기 ↓
+                </a>
+                <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener" class="btn-secondary"
+                    id="btn-github">
+                    GitHub 방문
+                </a>
+            </div>
         </div>
-        <p class="card-desc">
-          AI 기반 개발자 유틸리티 툴킷. 코드 변환, 포맷터, 인코더/디코더 등
-          개발에 필요한 다양한 도구를 한 곳에서 제공합니다.
-        </p>
-        <div class="card-tags">
-          <span class="tag">AI</span>
-          <span class="tag">Developer Tools</span>
-          <span class="tag">Utilities</span>
-        </div>
-        <div class="card-footer">
-          <span class="card-url">devpanda.nullpoint.cloud</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
+        <div class="hero-avatar" aria-hidden="true">🧑‍💻</div>
+    </section>
 
+    <!-- ── SKILLS ── -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+        <div class="section-header">
+            <div>
+                <p class="section-label">Tech Stack</p>
+                <h2 class="section-title" id="skills-title">기술 스택</h2>
+            </div>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-chip" id="skill-python">
+                <span class="skill-icon">🐍</span>
+                <div>
+                    <div class="skill-name">Python</div>
+                    <div class="skill-level">Backend · AI/ML</div>
+                </div>
+            </div>
+            <div class="skill-chip" id="skill-java">
+                <span class="skill-icon">☕</span>
+                <div>
+                    <div class="skill-name">Java</div>
+                    <div class="skill-level">Backend · OOP</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider">
+        <hr />
     </div>
-  </main>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-inner">
-      <p class="footer-copy">
-        © 2026 <strong>nullpoint.cloud</strong> — All rights reserved.
-      </p>
-      <nav class="footer-links" aria-label="푸터 링크">
-        <a href="https://devpanda.nullpoint.cloud">DevPanda</a>
-        <a href="/ads.txt">ads.txt</a>
-      </nav>
-    </div>
-  </footer>
+    <!-- ── PROJECTS ── -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="section-header">
+            <div>
+                <p class="section-label">Portfolio</p>
+                <h2 class="section-title" id="projects-title">프로젝트</h2>
+            </div>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="cards-grid">
+            <a href="https://devpanda.nullpoint.cloud" class="card" target="_blank" rel="noopener noreferrer"
+                id="card-devpanda" aria-label="DevPanda 프로젝트 방문">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="card-icon">🐼</div>
+                    <span class="card-status status-live">● Live</span>
+                </div>
+                <div>
+                    <div class="card-title">DevPanda</div>
+                </div>
+                <p class="card-desc">
+                    AI 기반 개발자 유틸리티 툴킷. 코드 변환, 포맷터, 인코더/디코더 등
+                    개발에 필요한 다양한 도구를 한 곳에서 제공합니다.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">Developer Tools</span>
+                    <span class="tag">Utilities</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-url">devpanda.nullpoint.cloud</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="footer-inner">
+            <p class="footer-copy">
+                © 2026 <strong>최재웅</strong> · nullpoint.cloud
+            </p>
+            <nav class="footer-links" aria-label="푸터 링크">
+                <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener">GitHub</a>
+                <a href="#projects">Projects</a>
+                <a href="/ads.txt">ads.txt</a>
+            </nav>
+        </div>
+    </footer>
 
 </body>
+
 </html>
