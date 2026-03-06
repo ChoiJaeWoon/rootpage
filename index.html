@@ -146,7 +146,28 @@
         </div>
     </section>
 
-    <!-- ── FOOTER ── -->
+    <!-- ── VISITOR COUNTER ── -->
+    <section class="stats-section" aria-label="방문자 통계">
+        <div class="stats-wrapper">
+            <div class="stat-item">
+                <span class="stat-icon">👤</span>
+                <div class="stat-info">
+                    <span class="stat-value" id="visit-today">—</span>
+                    <span class="stat-label">오늘 방문자</span>
+                </div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-icon">🌍</span>
+                <div class="stat-info">
+                    <span class="stat-value" id="visit-total">—</span>
+                    <span class="stat-label">누적 방문자</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <footer>
         <div class="footer-inner">
             <p class="footer-copy">© 2026 <strong>최재웅</strong> · nullpoint.cloud</p>
@@ -433,6 +454,82 @@
                         setTimeout(function () { document.body.removeChild(span); }, 800);
                     })(i);
                 }
+            }
+        })();
+    </script>
+
+    <script>
+        /* ── VISITOR COUNTER (Firebase Realtime Database) ── */
+        (function () {
+            var todayEl = document.getElementById('visit-today');
+            var totalEl = document.getElementById('visit-total');
+
+            var VISIT_KEY = 'nullpoint_visit_date';
+            var BASE_URL = 'https://devpanda-f04fa-default-rtdb.asia-southeast1.firebasedatabase.app/nullpoint_visits';
+
+            function getTodayStr() {
+                var d = new Date();
+                return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+            }
+
+            function hasVisitedToday() {
+                return localStorage.getItem(VISIT_KEY) === getTodayStr();
+            }
+
+            function formatNum(n) {
+                return n.toLocaleString();
+            }
+
+            /* ── 카운트 표시 ── */
+            function loadCounts() {
+                fetch(BASE_URL + '.json')
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        data = data || {};
+                        var total = typeof data.total === 'number' ? data.total : 0;
+                        var today = typeof data[getTodayStr()] === 'number' ? data[getTodayStr()] : 0;
+                        totalEl.textContent = formatNum(total);
+                        todayEl.textContent = formatNum(today);
+                    })
+                    .catch(function () {
+                        totalEl.textContent = '—';
+                        todayEl.textContent = '—';
+                    });
+            }
+
+            /* ── 방문 기록 ── */
+            function recordVisit() {
+                var todayStr = getTodayStr();
+
+                /* 먼저 현재 값 읽기 */
+                fetch(BASE_URL + '.json')
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        data = data || {};
+                        var newTotal = (typeof data.total === 'number' ? data.total : 0) + 1;
+                        var newToday = (typeof data[todayStr] === 'number' ? data[todayStr] : 0) + 1;
+
+                        data.total = newTotal;
+                        data[todayStr] = newToday;
+
+                        return fetch(BASE_URL + '.json', {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        }).then(function () {
+                            localStorage.setItem(VISIT_KEY, todayStr);
+                            totalEl.textContent = formatNum(newTotal);
+                            todayEl.textContent = formatNum(newToday);
+                        });
+                    })
+                    .catch(function () { /* 조용히 실패 */ });
+            }
+
+            /* ── 실행 ── */
+            if (hasVisitedToday()) {
+                loadCounts();   /* 이미 카운트됐으면 그냥 읽기만 */
+            } else {
+                recordVisit();  /* 새 방문자면 +1 하고 저장 */
             }
         })();
     </script>
