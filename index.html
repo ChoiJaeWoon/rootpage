@@ -11,9 +11,6 @@
     <meta property="og:url" content="https://nullpoint.cloud" />
     <title>nullpoint.cloud</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9370602153477675"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -111,7 +108,6 @@
             <p class="footer-copy">© 2026 <strong>최재웅</strong> · nullpoint.cloud</p>
             <nav class="footer-links" aria-label="푸터 링크">
                 <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener">GitHub</a>
-                <a href="/ads.txt">ads.txt</a>
             </nav>
         </div>
     </footer>
@@ -269,7 +265,7 @@
             var hint = document.getElementById('like-hint');
 
             var DATE_KEY = 'nullpoint_like_date';
-            var DB_URL = 'https://devpanda-f04fa-default-rtdb.asia-southeast1.firebasedatabase.app/nullpoint_likes.json';
+            var DB_URL = 'https://hello-355b5-default-rtdb.firebaseio.com/nullpoint_likes.json';
 
             function getTodayStr() {
                 var d = new Date();
@@ -364,7 +360,7 @@
             var totalEl = document.getElementById('visit-total');
 
             var VISIT_KEY = 'nullpoint_visit_date';
-            var BASE_URL = 'https://devpanda-f04fa-default-rtdb.asia-southeast1.firebasedatabase.app/nullpoint_visits';
+            var BASE_URL = 'https://hello-355b5-default-rtdb.firebaseio.com/nullpoint_visits';
 
             function getTodayStr() {
                 var d = new Date();
