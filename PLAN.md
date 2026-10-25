@@ -1,82 +1,25 @@
-# nullpoint.cloud 루트 도메인 포털 페이지 제작 계획
+# nullpoint.cloud — Cappen Hero (잉크 플루이드) + Olha 3D 프로젝터 전시관 개편 설계서 (SPEC v3)
 
-## 목적
-- Google AdSense 사이트 인증을 위해 `nullpoint.cloud` 루트 도메인에 콘텐츠 필요
-- 여러 서브도메인 프로젝트들의 메인 포털 역할
-- **무료 + 24시간 상시 운영** (GitHub Pages 사용)
-
----
-
-## 기술 스택
-- HTML + CSS + JS (순수 정적 파일)
-- **GitHub Pages** (무료 호스팅, 커스텀 도메인 + HTTPS 자동 지원)
-
----
-
-## 디렉토리 구조
-```
-D:\Desktop\rootpage\
-├── index.html       ← 포털 페이지 (AdSense 코드 포함)
-├── style.css
-├── ads.txt          ← AdSense 인증 필수
-└── CNAME            ← nullpoint.cloud 입력 (GitHub Pages 커스텀 도메인용)
-```
-
----
-
-## 페이지 디자인 요구사항
-- 라이트모드 기반의 모던한 포털/랜딩 페이지
-- 상단: 로고 + `nullpoint.cloud` 타이틀
-- 메인: 서브도메인 프로젝트 카드
-  - 🐼 DevPanda — AI & 개발자 유틸리티 툴킷 → https://devpanda.nullpoint.cloud
-- 하단: 심플한 푸터
-
----
-
-## AdSense 코드 (`<head>`에 삽입 필수!)
-```html
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9370602153477675"
-     crossorigin="anonymous"></script>
-```
-
-## ads.txt 파일 내용
-```
-google.com, pub-9370602153477675, DIRECT, f08c47fec0942fa0
-```
-
-## CNAME 파일 내용
-```
-nullpoint.cloud
-```
-
----
-
-## 배포 순서
-
-### 1. GitHub 레포 생성
-- GitHub에서 새 레포 생성 (예: `nullpoint-root`)
-- `D:\Desktop\rootpage\` 파일들 push
-
-### 2. GitHub Pages 활성화
-- 레포 → **Settings → Pages**
-- Source: `main` 브랜치 / `/ (root)` 선택
-- Custom domain: `nullpoint.cloud` 입력
-
-### 3. 가비아 DNS 설정
-A 레코드 4개 추가 (이름: `@`, TTL: 600):
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-### 4. HTTPS 활성화
-- GitHub Pages 설정에서 **"Enforce HTTPS"** 체크 (DNS 전파 후 자동 활성화)
-
----
-
-## 완료 기준
-- `https://nullpoint.cloud` 접속 시 포털 페이지 표시 + 자물쇠 🔒
-- `https://nullpoint.cloud/ads.txt` 접속 시 내용 표시
-- AdSense 콘솔에서 `nullpoint.cloud` 상태 승인
+## 1. 전체 컨셉 & 흐름 요약
+두 레퍼런스 사이트의 가장 강렬한 하이라이트를 하나의 유기적인 스토리라인으로 결합합니다:
+- **Sector 01 (Main Hero — `cappen.com` 레퍼런스)**:
+  - 순백색(`#FFFFFF`) 에디토리얼 캔버스 + **마우스 움직임에 반응해 먹물/잉크가 번지듯 퍼지는 Interactive Ink Fluid Trail Canvas**.
+  - 상단 미니멀 언더라인 그리드 네비게이션 (`NULLPOINT.CLOUD`, `○ DEVPANDA`, `○ FOLIOSQUAD`, `○ COMMUNITY`, `○ GITHUB ↗`).
+  - 초대형 3단 스태거드 타이포그래피:
+    - 1단: `BUILDING` + 우측 상단 미니멀 소개 문구 (`최재웅이 설계하고 운영하는 AI & 클라우드 서비스 스튜디오`)
+    - 2단: `TOMORROW` (우측 인덴트)
+    - 3단: `FOR` + **[ 블랙 와이드 프레임 속 실시간 회전하는 3D 다크 메탈릭 트위스트 토러스(Torus) ]** + `TODAY`
+  - **하단 스트라이프 브릿지**: 하단에 점진적으로 두꺼워지는 수평 블랙 라인(Blinds)을 배치하여, 아래쪽 다크 3D 전시관 천장으로 공간이 자연스럽게 이어지도록 설계.
+- **Sector 02 ~ 04 (3D Exhibition Room — `olhalazarieva.com` 3번째 섹션 레퍼런스 + 시점 회전)**:
+  - 단일 WebGL(Three.js) 3D 전시관 씬 안에서 **카메라의 시점(Pitch & Yaw)과 위치가 이동**하며 각 벽면의 프로젝터 스크린을 비춥니다.
+  - **Sector 01 → 02 전환 (천장 하강)**:
+    - 스크롤을 내리면 전시관 **천장 위쪽을 바라보던 카메라가 스르륵 아래로 내려오며(Pitch Down)**, 천장 빔프로젝터의 원뿔형 빛 기둥(Volumetric Light Cone), 좌우 벽 하단 화이트 LED 라인 조명, 바닥 타일 그리드와 원통형 스툴(의자)들이 모습을 드러냅니다.
+    - **정면 벽(North Wall)** 대형 화이트 프레임 스크린에 **`1/2 — DevPanda` (`devpanda.cloud`)** 실제 화면이 영사되고, 바닥 조명 위에 `1 / 2` 카운터와 `[ VISIT DEVPANDA ↗ ]` 버튼이 표시됩니다.
+  - **Sector 02 → 03 전환 (오른쪽 벽으로 90° 시점 회전)**:
+    - 스크롤을 한 번 더 내리면 슬라이드가 넘어가는 대신, **방 안에서 카메라가 오른쪽으로 90° 부드럽게 회전(Yaw -90°)**하며 바닥 스툴들 사이를 지나갑니다.
+    - **오른쪽 벽(East Wall)** 천장 프로젝터와 대형 화이트 프레임 스크린에 영사된 **`2/2 — FolioSquad` (`foliosquad.cloud`)**를 정면으로 마주보게 되며, 바닥에는 `2 / 2` 카운터와 `[ VISIT FOLIOSQUAD ↗ ]` 버튼이 표시됩니다.
+  - **Sector 03 → 04 전환 (오른쪽 벽으로 한 번 더 90° 회전 — Community & Stats Wall)**:
+    - 스크롤을 한 번 더 내리면 **세 번째 벽(South Wall)**으로 시점이 90° 돌아가며, 전시관 조명 아래에서 **좋아요 버튼(`🤍/❤️`, Firebase 연동)**과 **실시간 방문자 통계(오늘/누적, Firebase 연동)** 및 푸터가 나타납니다.
+- **우측 인터랙티브 목차 (`#toc-dock`)**:
+  - 평소에는 **가로줄(`—`) / 현재 섹터 동그라미(`●`)**로 표시(Sector 01 화이트 배경에서는 블랙 톤, Sector 02~04 다크 전시관에서는 화이트 톤으로 자동 전환).
+  - 마우스를 올리면 4개 섹터의 **미니 요약 카드 덱**이 펼쳐지며, 클릭 시 해당 섹터(벽면 시점)로 즉시 이동.

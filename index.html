@@ -4,20 +4,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="nullpoint.cloud — 최재웅의 서비스 모음" />
+    <meta name="description" content="nullpoint.cloud — 최재웅의 클라우드 서비스 & 포트폴리오 쇼케이스" />
     <meta property="og:title" content="nullpoint.cloud" />
-    <meta property="og:description" content="최재웅의 서비스 모음" />
+    <meta property="og:description" content="최재웅의 클라우드 서비스 & 포트폴리오 쇼케이스" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nullpoint.cloud" />
     <title>nullpoint.cloud</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 </head>
 
-<body>
+<body data-theme="light">
 
-    <!-- ── INTRO OVERLAY ── -->
+    <!-- ── INTRO OVERLAY (유지) ── -->
     <div id="intro" role="status" aria-label="로딩 중">
         <div class="intro-arc"></div>
         <div class="intro-arc-2"></div>
@@ -27,111 +34,223 @@
         <span class="intro-num" id="intro-num">01 / 07</span>
     </div>
 
-    <!-- ── HEADER ── -->
-    <header>
-        <a href="/" class="header-logo" id="logo">
-            null<span class="dot">point</span>.cloud
+    <!-- ── CAPPEN / OLHA HYBRID TOP GRID HEADER ── -->
+    <header class="top-grid-header" id="top-header">
+        <a href="#main" class="grid-nav-brand" data-goto="0">
+            NULLPOINT.CLOUD
         </a>
-        <nav aria-label="메인 네비게이션">
-            <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
-        </nav>
+        <button type="button" class="grid-nav-item" data-goto="1">
+            <span class="nav-dot"></span>
+            <span class="nav-text">DEVPANDA</span>
+        </button>
+        <button type="button" class="grid-nav-item" data-goto="2">
+            <span class="nav-dot"></span>
+            <span class="nav-text">FOLIOSQUAD</span>
+        </button>
+        <button type="button" class="grid-nav-item" data-goto="3">
+            <span class="nav-dot"></span>
+            <span class="nav-text">COMMUNITY</span>
+        </button>
+        <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener noreferrer" class="grid-nav-item grid-nav-external">
+            <span class="nav-dot"></span>
+            <span class="nav-text">GITHUB ↗</span>
+        </a>
     </header>
 
-    <!-- ── HERO ── -->
-    <section class="hub-hero">
-        <p class="hub-label">Made by 최재웅</p>
-        <h1 class="hub-title">null<span class="dot">point</span>.cloud</h1>
-        <p class="hub-desc">직접 만든 서비스들을 한 곳에서 모아봤어요.</p>
-    </section>
+    <!-- ── RIGHT INTERACTIVE TOC (가로줄 / 동그라미 + 호버 미니 카드 덱) ── -->
+    <aside class="toc-dock" id="toc-dock" aria-label="섹터 목차 네비게이션">
+        <div class="toc-list">
 
-    <!-- ── SERVICES ── -->
-    <main class="services-section" aria-label="서비스 목록">
-        <div class="services-grid">
+            <button type="button" class="toc-item is-active" data-goto="0" aria-label="01 Main 섹터로 이동" aria-current="step">
+                <div class="toc-mini-card">
+                    <div class="toc-mini-thumb thumb-icon">
+                        <span>01</span>
+                    </div>
+                    <div class="toc-mini-info">
+                        <span class="toc-mini-num">SECTOR 01 · STUDIO</span>
+                        <strong class="toc-mini-title">nullpoint.cloud</strong>
+                        <span class="toc-mini-sub">메인 히어로</span>
+                    </div>
+                </div>
+                <span class="toc-marker" aria-hidden="true"></span>
+            </button>
 
-            <a href="https://devpanda.cloud" class="service-card" target="_blank" rel="noopener noreferrer"
-                id="card-devpanda" aria-label="DevPanda 방문">
-                <div class="card-glow"></div>
-                <div class="service-card-header">
-                    <div class="service-icon">🐼</div>
-                    <span class="service-status status-live">● Live</span>
+            <button type="button" class="toc-item" data-goto="1" aria-label="02 DevPanda 섹터로 이동">
+                <div class="toc-mini-card">
+                    <div class="toc-mini-thumb">
+                        <img src="assets/preview-devpanda.png" alt="DevPanda 미리보기" loading="lazy" />
+                    </div>
+                    <div class="toc-mini-info">
+                        <span class="toc-mini-num">WALL 01 · 1/2</span>
+                        <strong class="toc-mini-title">DevPanda</strong>
+                        <span class="toc-mini-sub">devpanda.cloud</span>
+                    </div>
                 </div>
-                <div class="service-name">DevPanda</div>
-                <p class="service-desc">AI 기반 개발자 유틸리티 툴킷. 코드 변환, 포맷터, 인코더/디코더 등 개발에 필요한 도구들.</p>
-                <div class="service-footer">
-                    <span class="service-url">devpanda.cloud</span>
-                    <span class="service-arrow">→</span>
-                </div>
-            </a>
+                <span class="toc-marker" aria-hidden="true"></span>
+            </button>
 
-            <a href="https://foliosquad.cloud" class="service-card" target="_blank" rel="noopener noreferrer"
-                id="card-foliosquad" aria-label="FolioSquad 방문">
-                <div class="card-glow"></div>
-                <div class="service-card-header">
-                    <div class="service-icon">📈</div>
-                    <span class="service-status status-live">● Live</span>
+            <button type="button" class="toc-item" data-goto="2" aria-label="03 FolioSquad 섹터로 이동">
+                <div class="toc-mini-card">
+                    <div class="toc-mini-thumb">
+                        <img src="assets/preview-foliosquad.png" alt="FolioSquad 미리보기" loading="lazy" />
+                    </div>
+                    <div class="toc-mini-info">
+                        <span class="toc-mini-num">WALL 02 · 2/2</span>
+                        <strong class="toc-mini-title">FolioSquad</strong>
+                        <span class="toc-mini-sub">foliosquad.cloud</span>
+                    </div>
                 </div>
-                <div class="service-name">FolioSquad</div>
-                <p class="service-desc">AI 멀티 에이전트 자율 퀀트 트레이딩 데스크. 5인의 AI 에이전트와 선물 듀얼 엔진이 24시간 시장을 분석하고 거래합니다.</p>
-                <div class="service-footer">
-                    <span class="service-url">foliosquad.cloud</span>
-                    <span class="service-arrow">→</span>
-                </div>
-            </a>
+                <span class="toc-marker" aria-hidden="true"></span>
+            </button>
 
-            <!-- 추가 서비스 카드는 여기에 -->
+            <button type="button" class="toc-item" data-goto="3" aria-label="04 좋아요 및 방문자 통계 섹터로 이동">
+                <div class="toc-mini-card">
+                    <div class="toc-mini-thumb thumb-icon">
+                        <span>♥</span>
+                    </div>
+                    <div class="toc-mini-info">
+                        <span class="toc-mini-num">WALL 03 · STATS</span>
+                        <strong class="toc-mini-title">Likes &amp; Visits</strong>
+                        <span class="toc-mini-sub">좋아요 · 방문자 통계</span>
+                    </div>
+                </div>
+                <span class="toc-marker" aria-hidden="true"></span>
+            </button>
 
         </div>
+    </aside>
+
+    <!-- ── MAIN FULLPAGE VIEWPORT ── -->
+    <main class="master-viewport" id="master-viewport">
+
+        <!-- ==========================================================
+             SECTOR 01 : CAPPEN.COM STYLE BRUTALIST HERO + INK FLUID
+             ========================================================== -->
+        <section class="cappen-hero-section is-visible" id="sector-0" aria-label="메인 히어로">
+            <!-- Mouse Interactive Ink / Smoke Trail Canvas -->
+            <canvas id="ink-canvas" aria-hidden="true"></canvas>
+
+            <div class="cappen-hero-content">
+                <!-- Row 1: BUILDING + Right Editorial Copy -->
+                <div class="cappen-row cappen-row-1">
+                    <h1 class="cappen-word">BUILDING</h1>
+                    <p class="cappen-editorial-copy">
+                        <span class="editorial-indent"></span>Welcome to the portfolio of<br /><strong style="white-space:nowrap;">Choi Jae-Woong</strong> — a space where bold ideas are engineered into living digital products.
+                    </p>
+                </div>
+
+                <!-- Row 2: FROM NULL -->
+                <div class="cappen-row cappen-row-2">
+                    <span class="cappen-word">FROM</span>
+                    <span class="cappen-word">NULL</span>
+                </div>
+
+                <!-- Row 3: INTO ALL (순수 초대형 타이포그래피) -->
+                <div class="cappen-row cappen-row-3">
+                    <span class="cappen-word">INTO</span>
+                    <span class="cappen-word">ALL</span>
+                </div>
+            </div>
+
+            <!-- Cappen Bottom Progressive Black Stripes (Thickest bottom bar s-4 expands into RECENT WORKS stage!) -->
+            <div class="cappen-stripes" aria-hidden="true">
+                <div class="stripe s-1"></div>
+                <div class="stripe s-2"></div>
+                <div class="stripe s-3"></div>
+                <div class="stripe s-4" id="expanding-stripe-4">
+                    <div class="recent-works-inner" id="recent-works-inner" aria-label="RECENT WORKS">
+                        <canvas id="rw-matter-canvas" class="rw-matter-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+             SECTOR 02 ~ 04 : OLHA LAZARIEVA STYLE 3D EXHIBITION ROOM
+             (Ceiling Drop -> Front Wall 1/2 -> Right Turn 90° Wall 2/2 -> Right Turn 90° Stats Wall)
+             ========================================================== -->
+        <section class="exhibition-room-section" id="exhibition-section" aria-label="3D 프로젝터 전시관">
+            <!-- Three.js Fullscreen 3D Exhibition Room Canvas -->
+            <canvas id="room-canvas"></canvas>
+
+            <!-- Floor Projection Overlay for Wall 1 (DevPanda) & Wall 2 (FolioSquad) -->
+            <div class="room-floor-hud" id="room-floor-hud">
+                <div class="room-project-meta" id="room-project-meta">
+                    <span class="room-project-tag" id="room-project-tag">AI &amp; ML DEVELOPER TOOLKIT</span>
+                    <h2 class="room-project-title" id="room-project-title">DevPanda</h2>
+                </div>
+                <div class="room-counter" id="room-counter">1/2</div>
+                <a href="https://devpanda.cloud" target="_blank" rel="noopener noreferrer"
+                    class="room-view-case" id="room-view-case">
+                    [ VIEW CASE ↗ ]
+                </a>
+            </div>
+
+            <!-- Wall 3 Overlay : Likes & Visitor Stats inside the 3D Room -->
+            <div class="room-stats-overlay" id="room-stats-overlay" aria-label="좋아요 및 방문자 통계">
+                <div class="room-stats-stage">
+                    <p class="room-stats-eyebrow">[ EXHIBITION GUESTBOOK · 04 ]</p>
+                    <h2 class="room-stats-heading">ENJOYED THE EXHIBITION?</h2>
+                    <p class="room-stats-sub">전시관 관람이 마음에 드셨다면 하트를 남겨주세요.</p>
+
+                    <div class="room-stats-grid">
+                        <!-- LIKE BOX -->
+                        <div class="room-glass-box like-wrapper">
+                            <button class="like-btn" id="like-btn" aria-label="좋아요 누르기" title="하루에 한 번 누를 수 있어요">
+                                <span class="like-heart" id="like-heart">🤍</span>
+                                <span class="like-label" id="like-label">이 페이지가 마음에 드셨나요?</span>
+                            </button>
+                            <div class="like-count-wrap">
+                                <span class="like-count" id="like-count">0</span>
+                                <span class="like-count-label">명이 좋아해요</span>
+                            </div>
+                            <p class="like-hint" id="like-hint">하루에 한 번 누를 수 있어요 ✨</p>
+                        </div>
+
+                        <!-- VISITOR COUNTER BOX -->
+                        <div class="room-glass-box stats-card-box">
+                            <div class="stats-wrapper">
+                                <div class="stat-item">
+                                    <span class="stat-icon">👤</span>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="visit-today">—</span>
+                                        <span class="stat-label">TODAY VISITORS</span>
+                                    </div>
+                                </div>
+                                <div class="stat-divider"></div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">🌍</span>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="visit-total">—</span>
+                                        <span class="stat-label">TOTAL VISITORS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="stats-caption">LIVE FIREBASE REALTIME TELEMETRY</p>
+                        </div>
+                    </div>
+
+                    <button type="button" class="room-back-top" data-goto="0">
+                        [ ↑ BACK TO ENTRANCE ]
+                    </button>
+                </div>
+
+                <footer class="room-footer">
+                    <span>© 2026 CHOI JAE-WOON · NULLPOINT.CLOUD</span>
+                    <div class="room-footer-links">
+                        <a href="https://devpanda.cloud" target="_blank" rel="noopener noreferrer">DEVPANDA.CLOUD</a>
+                        <a href="https://foliosquad.cloud" target="_blank" rel="noopener noreferrer">FOLIOSQUAD.CLOUD</a>
+                        <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener noreferrer">GITHUB</a>
+                    </div>
+                </footer>
+            </div>
+        </section>
+
     </main>
 
-    <!-- ── LIKE BUTTON ── -->
-    <section class="like-section" aria-label="좋아요">
-        <div class="like-wrapper">
-            <button class="like-btn" id="like-btn" aria-label="좋아요 누르기" title="하루에 한 번 누를 수 있어요">
-                <span class="like-heart" id="like-heart">🤍</span>
-                <span class="like-label" id="like-label">이 페이지가 마음에 드셨나요?</span>
-            </button>
-            <div class="like-count-wrap">
-                <span class="like-count" id="like-count">0</span>
-                <span class="like-count-label">명이 좋아해요</span>
-            </div>
-            <p class="like-hint" id="like-hint">하루에 한 번 누를 수 있어요 ✨</p>
-        </div>
-    </section>
-
-    <!-- ── VISITOR COUNTER ── -->
-    <section class="stats-section" aria-label="방문자 통계">
-        <div class="stats-wrapper">
-            <div class="stat-item">
-                <span class="stat-icon">👤</span>
-                <div class="stat-info">
-                    <span class="stat-value" id="visit-today">—</span>
-                    <span class="stat-label">오늘 방문자</span>
-                </div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <span class="stat-icon">🌍</span>
-                <div class="stat-info">
-                    <span class="stat-value" id="visit-total">—</span>
-                    <span class="stat-label">누적 방문자</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── FOOTER ── -->
-    <footer>
-        <div class="footer-inner">
-            <p class="footer-copy">© 2026 <strong>최재웅</strong> · nullpoint.cloud</p>
-            <nav class="footer-links" aria-label="푸터 링크">
-                <a href="https://github.com/ChoiJaeWoon" target="_blank" rel="noopener">GitHub</a>
-            </nav>
-        </div>
-    </footer>
-
+    <!-- ── INTRO OVERLAY SCRIPT (기존 유지) ── -->
     <script>
         (function () {
-            /* ── Canvas ── */
             var canvas = document.getElementById('intro-canvas');
             var ctx = canvas.getContext('2d');
             var W, H;
@@ -144,7 +263,7 @@
 
             var TOTAL = 90;
             var DOT_R = 3.0;
-            var CLR = '#2563eb';
+            var CLR = '#111111';
             var FILL_MS = 2800;
             var FADE_MS = 160;
             function getR() { return Math.min(W, H) * 0.17; }
@@ -178,7 +297,7 @@
                         ctx.beginPath();
                         ctx.arc(x, y, DOT_R, 0, Math.PI * 2);
                         ctx.fillStyle = CLR;
-                        ctx.globalAlpha = dots[i].alpha * 0.8;
+                        ctx.globalAlpha = dots[i].alpha * 0.85;
                         ctx.fill();
                     }
                 } else {
@@ -225,7 +344,7 @@
                         x: cx, y: cy,
                         vx: Math.cos(a) * s, vy: Math.sin(a) * s,
                         r: 2 + Math.random() * 2, alpha: 0.8,
-                        color: Math.random() > 0.5 ? CLR : '#7c3aed',
+                        color: '#111111',
                     });
                 }
                 bursting = true;
@@ -243,15 +362,13 @@
             var FADE = 130;
             var idx = 1;
 
-            document.body.style.overflow = 'hidden';
-
             function showNext() {
                 if (idx >= TOTAL_W) {
                     el.classList.add('fade-out');
                     triggerBurst();
                     setTimeout(function () {
                         overlay.classList.add('hidden');
-                        document.body.style.overflow = '';
+                        window.__introFinished = true;
                     }, 1100);
                     return;
                 }
@@ -272,8 +389,469 @@
         })();
     </script>
 
+    <!-- ── SECTOR 01 : WEBGL NAVIER-STOKES FLUID INK SIMULATION (Cappen Style) ── -->
     <script>
-        /* ── LIKE BUTTON (Firebase Realtime Database) ── */
+        (function () {
+            var canvas = document.getElementById('ink-canvas');
+            if (!canvas) return;
+
+            var gl = canvas.getContext('webgl2', { alpha: true, depth: false, stencil: false, antialias: false }) ||
+                     canvas.getContext('webgl', { alpha: true, depth: false, stencil: false, antialias: false });
+            if (!gl) return;
+
+            var isWebGL2 = (typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext);
+            var extHalfFloat = !isWebGL2 ? gl.getExtension('OES_texture_half_float') : null;
+            var supportLinear = isWebGL2 ? gl.getExtension('OES_texture_float_linear') : gl.getExtension('OES_texture_half_float_linear');
+            if (isWebGL2) gl.getExtension('EXT_color_buffer_float');
+
+            var internalFormat = isWebGL2 ? gl.RGBA16F : gl.RGBA;
+            var internalFormatRG = isWebGL2 ? gl.RG16F : gl.RGBA;
+            var formatRG = isWebGL2 ? gl.RG : gl.RGBA;
+            var texType = isWebGL2 ? gl.HALF_FLOAT : (extHalfFloat ? extHalfFloat.HALF_FLOAT_OES : gl.UNSIGNED_BYTE);
+            var filterParam = supportLinear ? gl.LINEAR : gl.NEAREST;
+
+            function compileShader(type, source) {
+                var shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            function createProgram(vsSource, fsSource) {
+                var program = gl.createProgram();
+                gl.attachShader(program, compileShader(gl.VERTEX_SHADER, vsSource));
+                gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, fsSource));
+                gl.linkProgram(program);
+                var uniforms = {};
+                var count = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+                for (var i = 0; i < count; i++) {
+                    var name = gl.getActiveUniform(program, i).name;
+                    uniforms[name] = gl.getUniformLocation(program, name);
+                }
+                return { program: program, uniforms: uniforms };
+            }
+
+            var baseVertexShader = [
+                'precision highp float;',
+                'attribute vec2 aPosition;',
+                'varying vec2 vUv;',
+                'varying vec2 vL;',
+                'varying vec2 vR;',
+                'varying vec2 vT;',
+                'varying vec2 vB;',
+                'uniform vec2 texelSize;',
+                'void main () {',
+                '    vUv = aPosition * 0.5 + 0.5;',
+                '    vL = vUv - vec2(texelSize.x, 0.0);',
+                '    vR = vUv + vec2(texelSize.x, 0.0);',
+                '    vT = vUv + vec2(0.0, texelSize.y);',
+                '    vB = vUv - vec2(0.0, texelSize.y);',
+                '    gl_Position = vec4(aPosition, 0.0, 1.0);',
+                '}'
+            ].join('\n');
+
+            var clearShader = [
+                'precision mediump float;',
+                'varying highp vec2 vUv;',
+                'uniform sampler2D uTexture;',
+                'uniform float value;',
+                'void main () {',
+                '    gl_FragColor = value * texture2D(uTexture, vUv);',
+                '}'
+            ].join('\n');
+
+            var splatShader = [
+                'precision highp float;',
+                'varying vec2 vUv;',
+                'uniform sampler2D uTarget;',
+                'uniform float aspectRatio;',
+                'uniform vec3 color;',
+                'uniform vec2 point;',
+                'uniform float radius;',
+                'void main () {',
+                '    vec2 p = vUv - point.xy;',
+                '    p.x *= aspectRatio;',
+                '    vec3 splat = exp(-dot(p, p) / radius) * color;',
+                '    vec3 base = texture2D(uTarget, vUv).xyz;',
+                '    gl_FragColor = vec4(base + splat, 1.0);',
+                '}'
+            ].join('\n');
+
+            var advectionShader = [
+                'precision highp float;',
+                'varying vec2 vUv;',
+                'uniform sampler2D uVelocity;',
+                'uniform sampler2D uSource;',
+                'uniform vec2 texelSize;',
+                'uniform float dt;',
+                'uniform float dissipation;',
+                'void main () {',
+                '    vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;',
+                '    gl_FragColor = dissipation * texture2D(uSource, coord);',
+                '    gl_FragColor.a = 1.0;',
+                '}'
+            ].join('\n');
+
+            var divergenceShader = [
+                'precision mediump float;',
+                'varying highp vec2 vUv;',
+                'varying highp vec2 vL;',
+                'varying highp vec2 vR;',
+                'varying highp vec2 vT;',
+                'varying highp vec2 vB;',
+                'uniform sampler2D uVelocity;',
+                'void main () {',
+                '    float L = texture2D(uVelocity, vL).x;',
+                '    float R = texture2D(uVelocity, vR).x;',
+                '    float T = texture2D(uVelocity, vT).y;',
+                '    float B = texture2D(uVelocity, vB).y;',
+                '    vec2 C = texture2D(uVelocity, vUv).xy;',
+                '    if (vL.x < 0.0) { L = -C.x; }',
+                '    if (vR.x > 1.0) { R = -C.x; }',
+                '    if (vT.y > 1.0) { T = -C.y; }',
+                '    if (vB.y < 0.0) { B = -C.y; }',
+                '    float div = 0.5 * (R - L + T - B);',
+                '    gl_FragColor = vec4(div, 0.0, 0.0, 1.0);',
+                '}'
+            ].join('\n');
+
+            var curlShader = [
+                'precision mediump float;',
+                'varying highp vec2 vUv;',
+                'varying highp vec2 vL;',
+                'varying highp vec2 vR;',
+                'varying highp vec2 vT;',
+                'varying highp vec2 vB;',
+                'uniform sampler2D uVelocity;',
+                'void main () {',
+                '    float L = texture2D(uVelocity, vL).y;',
+                '    float R = texture2D(uVelocity, vR).y;',
+                '    float T = texture2D(uVelocity, vT).x;',
+                '    float B = texture2D(uVelocity, vB).x;',
+                '    float vorticity = R - L - T + B;',
+                '    gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);',
+                '}'
+            ].join('\n');
+
+            var vorticityShader = [
+                'precision highp float;',
+                'varying vec2 vUv;',
+                'varying vec2 vL;',
+                'varying vec2 vR;',
+                'varying vec2 vT;',
+                'varying vec2 vB;',
+                'uniform sampler2D uVelocity;',
+                'uniform sampler2D uCurl;',
+                'uniform float curl;',
+                'uniform float dt;',
+                'void main () {',
+                '    float L = texture2D(uCurl, vL).x;',
+                '    float R = texture2D(uCurl, vR).x;',
+                '    float T = texture2D(uCurl, vT).x;',
+                '    float B = texture2D(uCurl, vB).x;',
+                '    float C = texture2D(uCurl, vUv).x;',
+                '    vec2 force = 0.5 * vec2(abs(T) - abs(B), abs(R) - abs(L));',
+                '    force /= length(force) + 0.0001;',
+                '    force *= curl * C;',
+                '    force.y *= -1.0;',
+                '    vec2 vel = texture2D(uVelocity, vUv).xy;',
+                '    gl_FragColor = vec4(vel + force * dt, 0.0, 1.0);',
+                '}'
+            ].join('\n');
+
+            var pressureShader = [
+                'precision mediump float;',
+                'varying highp vec2 vUv;',
+                'varying highp vec2 vL;',
+                'varying highp vec2 vR;',
+                'varying highp vec2 vT;',
+                'varying highp vec2 vB;',
+                'uniform sampler2D uPressure;',
+                'uniform sampler2D uDivergence;',
+                'void main () {',
+                '    float L = texture2D(uPressure, vL).x;',
+                '    float R = texture2D(uPressure, vR).x;',
+                '    float T = texture2D(uPressure, vT).x;',
+                '    float B = texture2D(uPressure, vB).x;',
+                '    float divergence = texture2D(uDivergence, vUv).x;',
+                '    float pressure = (L + R + B + T - divergence) * 0.25;',
+                '    gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);',
+                '}'
+            ].join('\n');
+
+            var gradientSubtractShader = [
+                'precision mediump float;',
+                'varying highp vec2 vUv;',
+                'varying highp vec2 vL;',
+                'varying highp vec2 vR;',
+                'varying highp vec2 vT;',
+                'varying highp vec2 vB;',
+                'uniform sampler2D uPressure;',
+                'uniform sampler2D uVelocity;',
+                'void main () {',
+                '    float L = texture2D(uPressure, vL).x;',
+                '    float R = texture2D(uPressure, vR).x;',
+                '    float T = texture2D(uPressure, vT).x;',
+                '    float B = texture2D(uPressure, vB).x;',
+                '    vec2 velocity = texture2D(uVelocity, vUv).xy;',
+                '    velocity.xy -= vec2(R - L, T - B);',
+                '    gl_FragColor = vec4(velocity, 0.0, 1.0);',
+                '}'
+            ].join('\n');
+
+            /* Display Shader: Renders pure white ink with mix-blend-mode: difference
+               -> Appears dark/black on white background (#ffffff)
+               -> Appears white/light on black text & stripes (#050505) */
+            var displayShader = [
+                'precision highp float;',
+                'varying vec2 vUv;',
+                'uniform sampler2D uTexture;',
+                'void main () {',
+                '    vec3 d = texture2D(uTexture, vUv).rgb;',
+                '    float density = clamp(max(d.r, max(d.g, d.b)), 0.0, 1.0);',
+                '    float alpha = smoothstep(0.0, 0.72, density) * 0.92;',
+                '    gl_FragColor = vec4(alpha, alpha, alpha, alpha);',
+                '}'
+            ].join('\n');
+
+            var progClear = createProgram(baseVertexShader, clearShader);
+            var progSplat = createProgram(baseVertexShader, splatShader);
+            var progAdvection = createProgram(baseVertexShader, advectionShader);
+            var progDivergence = createProgram(baseVertexShader, divergenceShader);
+            var progCurl = createProgram(baseVertexShader, curlShader);
+            var progVorticity = createProgram(baseVertexShader, vorticityShader);
+            var progPressure = createProgram(baseVertexShader, pressureShader);
+            var progGradSubtract = createProgram(baseVertexShader, gradientSubtractShader);
+            var progDisplay = createProgram(baseVertexShader, displayShader);
+
+            var quadBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+            var idxBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
+            gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(0);
+
+            function blit(target) {
+                if (target == null) {
+                    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+                    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                } else {
+                    gl.viewport(0, 0, target.width, target.height);
+                    gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
+                }
+                gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+            }
+
+            function createFBO(w, h, internalFmt, fmt, type, param) {
+                gl.activeTexture(gl.TEXTURE0);
+                var texture = gl.createTexture();
+                gl.bindTexture(gl.TEXTURE_2D, texture);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                gl.texImage2D(gl.TEXTURE_2D, 0, internalFmt, w, h, 0, fmt, type, null);
+
+                var fbo = gl.createFramebuffer();
+                gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+                gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+                gl.viewport(0, 0, w, h);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+
+                return {
+                    texture: texture,
+                    fbo: fbo,
+                    width: w,
+                    height: h,
+                    texelSizeX: 1.0 / w,
+                    texelSizeY: 1.0 / h,
+                    attach: function (id) {
+                        gl.activeTexture(gl.TEXTURE0 + id);
+                        gl.bindTexture(gl.TEXTURE_2D, texture);
+                        return id;
+                    }
+                };
+            }
+
+            function createDoubleFBO(w, h, internalFmt, fmt, type, param) {
+                var fbo1 = createFBO(w, h, internalFmt, fmt, type, param);
+                var fbo2 = createFBO(w, h, internalFmt, fmt, type, param);
+                return {
+                    width: w,
+                    height: h,
+                    texelSizeX: fbo1.texelSizeX,
+                    texelSizeY: fbo1.texelSizeY,
+                    read: fbo1,
+                    write: fbo2,
+                    swap: function () {
+                        var temp = this.read;
+                        this.read = this.write;
+                        this.write = temp;
+                    }
+                };
+            }
+
+            var simW = 192, simH = 192;
+            var dyeW = 768, dyeH = 768;
+            var dye, velocity, divergence, curl, pressure;
+
+            function initFramebuffers() {
+                var aspect = window.innerWidth / Math.max(1, window.innerHeight);
+                simW = Math.round(160 * Math.max(1, aspect));
+                simH = 160;
+                dyeW = Math.round(640 * Math.max(1, aspect));
+                dyeH = 640;
+
+                dye = createDoubleFBO(dyeW, dyeH, internalFormat, gl.RGBA, texType, filterParam);
+                velocity = createDoubleFBO(simW, simH, internalFormatRG, formatRG, texType, filterParam);
+                divergence = createFBO(simW, simH, internalFormat, gl.RGBA, texType, gl.NEAREST);
+                curl = createFBO(simW, simH, internalFormat, gl.RGBA, texType, gl.NEAREST);
+                pressure = createDoubleFBO(simW, simH, internalFormat, gl.RGBA, texType, gl.NEAREST);
+            }
+
+            function resizeFluidCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initFramebuffers();
+            }
+            resizeFluidCanvas();
+            window.addEventListener('resize', resizeFluidCanvas);
+
+            function splat(x, y, dx, dy, intensity) {
+                gl.useProgram(progSplat.program);
+                gl.uniform1i(progSplat.uniforms.uTarget, velocity.read.attach(0));
+                gl.uniform1f(progSplat.uniforms.aspectRatio, canvas.width / canvas.height);
+                gl.uniform2f(progSplat.uniforms.point, x, y);
+                gl.uniform3f(progSplat.uniforms.color, dx, dy, 0.0);
+                gl.uniform1f(progSplat.uniforms.radius, 0.0022);
+                blit(velocity.write);
+                velocity.swap();
+
+                gl.uniform1i(progSplat.uniforms.uTarget, dye.read.attach(0));
+                gl.uniform3f(progSplat.uniforms.color, intensity, intensity, intensity);
+                gl.uniform1f(progSplat.uniforms.radius, 0.0028);
+                blit(dye.write);
+                dye.swap();
+            }
+
+            var lastMouse = { x: null, y: null };
+            window.addEventListener('mousemove', function (e) {
+                if (document.body.getAttribute('data-theme') !== 'light') return;
+                var nx = e.clientX / canvas.width;
+                var ny = 1.0 - (e.clientY / canvas.height);
+                if (lastMouse.x === null) {
+                    lastMouse.x = nx;
+                    lastMouse.y = ny;
+                    return;
+                }
+                var dx = (nx - lastMouse.x) * 4800;
+                var dy = (ny - lastMouse.y) * 4800;
+                lastMouse.x = nx;
+                lastMouse.y = ny;
+                var speed = Math.hypot(dx, dy);
+                if (speed > 0.5) {
+                    var inkStrength = Math.min(0.85, 0.22 + speed * 0.0045);
+                    splat(nx, ny, dx, dy, inkStrength);
+                }
+            });
+
+            /* Initial subtle ink swirl so the canvas feels alive immediately */
+            setTimeout(function () {
+                splat(0.46, 0.52, 420, 180, 0.55);
+                splat(0.54, 0.46, -380, -160, 0.48);
+            }, 300);
+
+            function stepFluid() {
+                if (document.body.getAttribute('data-theme') === 'light') {
+                    var dt = 0.016;
+                    gl.disable(gl.BLEND);
+
+                    /* 1) Curl */
+                    gl.useProgram(progCurl.program);
+                    gl.uniform2f(progCurl.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+                    gl.uniform1i(progCurl.uniforms.uVelocity, velocity.read.attach(0));
+                    blit(curl);
+
+                    /* 2) Vorticity Confinement (Swirl!) */
+                    gl.useProgram(progVorticity.program);
+                    gl.uniform2f(progVorticity.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+                    gl.uniform1i(progVorticity.uniforms.uVelocity, velocity.read.attach(0));
+                    gl.uniform1i(progVorticity.uniforms.uCurl, curl.attach(1));
+                    gl.uniform1f(progVorticity.uniforms.curl, 32.0);
+                    gl.uniform1f(progVorticity.uniforms.dt, dt);
+                    blit(velocity.write);
+                    velocity.swap();
+
+                    /* 3) Divergence */
+                    gl.useProgram(progDivergence.program);
+                    gl.uniform2f(progDivergence.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+                    gl.uniform1i(progDivergence.uniforms.uVelocity, velocity.read.attach(0));
+                    blit(divergence);
+
+                    /* 4) Clear Pressure */
+                    gl.useProgram(progClear.program);
+                    gl.uniform1i(progClear.uniforms.uTexture, pressure.read.attach(0));
+                    gl.uniform1f(progClear.uniforms.value, 0.8);
+                    blit(pressure.write);
+                    pressure.swap();
+
+                    /* 5) Pressure Jacobi Iterations */
+                    gl.useProgram(progPressure.program);
+                    gl.uniform2f(progPressure.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+                    gl.uniform1i(progPressure.uniforms.uDivergence, divergence.attach(0));
+                    for (var i = 0; i < 16; i++) {
+                        gl.uniform1i(progPressure.uniforms.uPressure, pressure.read.attach(1));
+                        blit(pressure.write);
+                        pressure.swap();
+                    }
+
+                    /* 6) Subtract Pressure Gradient */
+                    gl.useProgram(progGradSubtract.program);
+                    gl.uniform2f(progGradSubtract.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+                    gl.uniform1i(progGradSubtract.uniforms.uPressure, pressure.read.attach(0));
+                    gl.uniform1i(progGradSubtract.uniforms.uVelocity, velocity.read.attach(1));
+                    blit(velocity.write);
+                    velocity.swap();
+
+                    /* 7) Advect Velocity */
+                    gl.useProgram(progAdvection.program);
+                    gl.uniform2f(progAdvection.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+                    gl.uniform1i(progAdvection.uniforms.uVelocity, velocity.read.attach(0));
+                    gl.uniform1i(progAdvection.uniforms.uSource, velocity.read.attach(0));
+                    gl.uniform1f(progAdvection.uniforms.dt, dt);
+                    gl.uniform1f(progAdvection.uniforms.dissipation, 0.982);
+                    blit(velocity.write);
+                    velocity.swap();
+
+                    /* 8) Advect Ink Dye */
+                    gl.uniform2f(progAdvection.uniforms.texelSize, dye.texelSizeX, dye.texelSizeY);
+                    gl.uniform1i(progAdvection.uniforms.uVelocity, velocity.read.attach(0));
+                    gl.uniform1i(progAdvection.uniforms.uSource, dye.read.attach(1));
+                    gl.uniform1f(progAdvection.uniforms.dissipation, 0.968);
+                    blit(dye.write);
+                    dye.swap();
+
+                    /* 9) Render to Screen */
+                    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+                    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                    gl.clearColor(0, 0, 0, 0);
+                    gl.clear(gl.COLOR_BUFFER_BIT);
+                    gl.enable(gl.BLEND);
+                    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+                    gl.useProgram(progDisplay.program);
+                    gl.uniform1i(progDisplay.uniforms.uTexture, dye.read.attach(0));
+                    blit(null);
+                }
+                requestAnimationFrame(stepFluid);
+            }
+            requestAnimationFrame(stepFluid);
+        })();
+    </script>
+
+    <!-- ── LIKE BUTTON (Firebase Realtime Database — 기존 유지) ── -->
+    <script>
         (function () {
             var btn = document.getElementById('like-btn');
             var heart = document.getElementById('like-heart');
@@ -370,8 +948,8 @@
         })();
     </script>
 
+    <!-- ── VISITOR COUNTER (Firebase Realtime Database — 기존 유지) ── -->
     <script>
-        /* ── VISITOR COUNTER (Firebase Realtime Database) ── */
         (function () {
             var todayEl = document.getElementById('visit-today');
             var totalEl = document.getElementById('visit-total');
@@ -427,6 +1005,794 @@
             }
 
             if (hasVisitedToday()) { loadCounts(); } else { recordVisit(); }
+        })();
+    </script>
+
+    <!-- ── SECTOR 02 ~ 04 : OLHA LAZARIEVA REAL GLB EXHIBITION ROOM + 90° VIEWPOINT ROTATION ── -->
+    <script>
+        (function () {
+            var roomCanvas = document.getElementById('room-canvas');
+            if (!roomCanvas || !window.THREE) return;
+
+            var scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x101010);
+            /* Exact fog from Olha Lazarieva reference: near=2.5, far=3.0 */
+            scene.fog = new THREE.Fog(0x101010, 2.5, 3.0);
+
+            var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.05, 20);
+            camera.position.set(0, 0, 1.5);
+
+            var renderer = new THREE.WebGLRenderer({
+                canvas: roomCanvas,
+                antialias: true,
+                powerPreference: 'high-performance'
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 0.82;
+
+            window.addEventListener('resize', function () {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            /* Pivot group for ceiling-drop rotation (1.5 -> 0) and 90° right-turn viewpoint rotation */
+            var masterStage = new THREE.Group();
+            masterStage.rotation.order = 'YXZ';
+            masterStage.rotation.x = 1.5;
+            masterStage.rotation.y = 0;
+            scene.add(masterStage);
+
+            var texLoader = new THREE.TextureLoader();
+
+            function loadSRGBTexture(url) {
+                var t = texLoader.load(url);
+                t.encoding = THREE.sRGBEncoding;
+                t.anisotropy = 8;
+                return t;
+            }
+
+            var devpandaTex = loadSRGBTexture('assets/preview-devpanda.png');
+            var foliosquadTex = loadSRGBTexture('assets/preview-foliosquad.png');
+            var beamTex = loadSRGBTexture('assets/beam_linear.png');
+            beamTex.wrapS = THREE.ClampToEdgeWrapping;
+            beamTex.wrapT = THREE.ClampToEdgeWrapping;
+
+            /* Build 3 Exhibition Wings at 90° intervals around the camera pivot:
+               - Wing 0 (yaw = 0):       Sector 1 — DevPanda (1/2)
+               - Wing 1 (yaw = -PI/2):   Sector 2 — FolioSquad (2/2)
+               - Wing 2 (yaw = -PI):     Sector 3 — Likes & Visitor Stats
+            */
+            var wings = [];
+            var wingConfigs = [
+                { yaw: 0,            screenTex: devpandaTex,   hasScreen: true },
+                { yaw: -Math.PI / 2, screenTex: foliosquadTex, hasScreen: true },
+                { yaw: -Math.PI,     screenTex: null,          hasScreen: false }
+            ];
+
+            wingConfigs.forEach(function (cfg) {
+                var wingGroup = new THREE.Group();
+                wingGroup.rotation.y = cfg.yaw;
+
+                /* Volumetric Projector Light Cone (exact reference transform & geometry) */
+                var coneGeo = new THREE.ConeGeometry(0.45, 2.0, 32, 1, true);
+                var coneMat = new THREE.MeshBasicMaterial({
+                    map: beamTex,
+                    color: 0xffffff,
+                    transparent: true,
+                    depthWrite: false,
+                    depthTest: true,
+                    side: THREE.DoubleSide,
+                    blending: THREE.AdditiveBlending,
+                    opacity: 0.1
+                });
+                var beamMesh = new THREE.Mesh(coneGeo, coneMat);
+                beamMesh.renderOrder = 10;
+                beamMesh.position.set(0.029, 0.177, 0.37);
+                beamMesh.rotation.set(Math.PI / 2, 0, 0);
+                beamMesh.scale.set(0.1, 0.03, 0.1);
+                wingGroup.add(beamMesh);
+
+                /* Screen Projection Plane (exact reference position [0.004, 0.001, -0.72] and size [0.813, 0.47]) */
+                var screenMat = null;
+                if (cfg.hasScreen && cfg.screenTex) {
+                    screenMat = new THREE.MeshBasicMaterial({
+                        map: cfg.screenTex,
+                        transparent: true,
+                        opacity: 1.0
+                    });
+                    var screenMesh = new THREE.Mesh(
+                        new THREE.PlaneGeometry(0.813, 0.47),
+                        screenMat
+                    );
+                    screenMesh.position.set(0.004, 0.001, -0.72);
+                    wingGroup.add(screenMesh);
+                }
+
+                masterStage.add(wingGroup);
+                wings.push({
+                    group: wingGroup,
+                    yaw: cfg.yaw,
+                    beamMat: coneMat,
+                    screenMat: screenMat,
+                    roomMats: []
+                });
+            });
+
+            /* Load Real Baked Blender GLB (`assets/models/final-scene.glb`) */
+            if (THREE.GLTFLoader && THREE.DRACOLoader) {
+                var dracoLoader = new THREE.DRACOLoader();
+                dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+                var gltfLoader = new THREE.GLTFLoader();
+                gltfLoader.setDRACOLoader(dracoLoader);
+
+                gltfLoader.load('assets/models/final-scene.glb', function (gltf) {
+                    var templateScene = gltf.scene;
+
+                    wings.forEach(function (w, wIdx) {
+                        var clonedRoom = templateScene.clone(true);
+                        clonedRoom.position.set(0, -0.25, 0);
+
+                        clonedRoom.traverse(function (node) {
+                            if (node.isMesh) {
+                                /* In Wing 2 (Sector 3 Stats), hide the white projection screen frame (`Material`)
+                                   so the Guestbook / Likes & Visitor Stats overlay sits cleanly inside the dark gallery wall */
+                                if (!wingConfigs[wIdx].hasScreen && node.material && node.material.name === 'Material') {
+                                    node.visible = false;
+                                    return;
+                                }
+
+                                var origMat = node.material;
+                                var mapTex = (origMat && origMat.map) ? origMat.map : null;
+                                if (mapTex) {
+                                    mapTex.encoding = THREE.sRGBEncoding;
+                                    mapTex.flipY = false;
+                                }
+
+                                var bakedMat = new THREE.MeshStandardMaterial({
+                                    map: mapTex,
+                                    emissiveMap: mapTex,
+                                    emissive: new THREE.Color(0xffffff),
+                                    emissiveIntensity: 1.0,
+                                    roughness: 1.0,
+                                    metalness: 0.0,
+                                    transparent: true,
+                                    opacity: 1.0
+                                });
+                                if (origMat && origMat.normalMap) bakedMat.normalMap = origMat.normalMap;
+                                if (origMat && origMat.aoMap) bakedMat.aoMap = origMat.aoMap;
+                                if (origMat && origMat.roughnessMap) bakedMat.roughnessMap = origMat.roughnessMap;
+
+                                node.material = bakedMat;
+                                w.roomMats.push(bakedMat);
+                            }
+                        });
+
+                        w.group.add(clonedRoom);
+                    });
+                });
+            }
+
+            /* ── Camera & Stage Rotation State (Ceiling Drop + 90° Right-Turn Viewpoint) ──
+               - Sector 0 (Main Hero):     stageRotX = +1.5 (Looking up at exhibition ceiling), stageRotY = 0
+               - Sector 1 (1/2 DevPanda):  stageRotX = 0.0  (Drops down from ceiling to front wall), stageRotY = 0
+               - Sector 2 (2/2 FolioSquad):stageRotX = 0.0, stageRotY = +PI/2 (Camera turns 90° right to East Wing!)
+               - Sector 3 (Likes & Stats): stageRotX = 0.0, stageRotY = +PI   (Camera turns 90° right to South Wing!)
+            */
+            var stageRotX = 1.5;
+            var targetStageRotX = 1.5;
+            var stageRotY = 0;
+            var targetStageRotY = 0;
+
+            var mouseOffset = { x: 0, y: 0 };
+            window.addEventListener('mousemove', function (e) {
+                mouseOffset.x = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseOffset.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            var sectorKeyframes = [
+                { rotX: 1.5, rotY: 0,           fogNear: 0.01, fogFar: 2.7 },
+                { rotX: 0.0, rotY: 0,           fogNear: 2.5,  fogFar: 3.0 },
+                { rotX: 0.0, rotY: Math.PI / 2, fogNear: 2.5,  fogFar: 3.0 },
+                { rotX: 0.0, rotY: Math.PI,     fogNear: 2.5,  fogFar: 3.0 }
+            ];
+            var targetFogNear = 0.01, targetFogFar = 2.7;
+
+            var projectsData = {
+                1: {
+                    tag: 'AI & ML DEVELOPER TOOLKIT',
+                    title: 'DevPanda',
+                    counter: '1/2',
+                    url: 'https://devpanda.cloud',
+                    cta: '[ VIEW CASE ↗ ]'
+                },
+                2: {
+                    tag: 'AUTONOMOUS MULTI-AGENT QUANT DESK',
+                    title: 'FolioSquad',
+                    counter: '2/2',
+                    url: 'https://foliosquad.cloud',
+                    cta: '[ VIEW CASE ↗ ]'
+                }
+            };
+
+            var cappenSection = document.getElementById('sector-0');
+            var expandingStripe4 = document.getElementById('expanding-stripe-4');
+            var recentWorksInner = document.getElementById('recent-works-inner');
+            var rwCanvas = document.getElementById('rw-matter-canvas');
+            var floorHud = document.getElementById('room-floor-hud');
+
+            /* ── Exact Olha Lazarieva Section 2 (`qR`) Matter.js 2D Rigid-Body Physics Engine for "RECENT WORKS" ──
+               Extracted directly from olhalazarieva.com/static/js/main.b8af34b9.js:
+               - Engine.create({ positionIterations: 8, velocityIterations: 6 }), gravity.y = 3
+               - Each letter is a Matter.Bodies.rectangle with restitution: 0.2, friction: 0.03, frictionAir: 0.02, density: 0.0005
+               - Static floor & side walls keep letters inside the banner
+               - Starts static (isStatic: true); when scroll reaches threshold, setStatic(body, false) + micro random force
+               - Mousemove repulsion within radius (130px desktop / 80px mobile) blasts letters away from cursor! */
+            var rwDropped = false;
+            var rwReturning = false;
+            var matterEngine = null;
+            var matterRunner = null;
+            var matterFloor = null;
+            var matterLeftWall = null;
+            var matterRightWall = null;
+            var matterTopWall = null;
+            var matterCharBodies = [];
+            var matterHomePos = [];
+            var matterFontPx = 110;
+            var matterBoxH = 100;
+            var matterCtx = rwCanvas ? rwCanvas.getContext('2d') : null;
+            var measureCanvas = document.createElement('canvas');
+            var measureCtx = measureCanvas.getContext('2d');
+
+            function initRecentWorksMatter() {
+                if (!window.Matter || !rwCanvas || !matterCtx) return;
+                var Engine = Matter.Engine;
+                var World = Matter.World;
+                var Bodies = Matter.Bodies;
+                var Body = Matter.Body;
+                var Runner = Matter.Runner;
+
+                if (matterRunner) {
+                    Runner.stop(matterRunner);
+                    matterRunner = null;
+                }
+                if (matterEngine) {
+                    World.clear(matterEngine.world, false);
+                    Engine.clear(matterEngine);
+                }
+
+                var v = window.innerWidth;
+                var m = Math.round(window.innerHeight * 0.34); // Full expanded height of #expanding-stripe-4 (34vh)
+                var dpr = Math.min(window.devicePixelRatio || 1, 2);
+                rwCanvas.width = v * dpr;
+                rwCanvas.height = m * dpr;
+                rwCanvas.style.width = v + 'px';
+                rwCanvas.style.height = m + 'px';
+                matterCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                var scale = v / 1920;
+                matterFontPx = Math.max(54, Math.min(138, (v > 1100 ? 132 : 180) * scale));
+                matterBoxH = matterFontPx * 0.76;
+                var tracking = -8 * scale; // Tighter letter spacing (like Olha's ee = -8px * scale)
+
+                measureCtx.font = '900 ' + matterFontPx + 'px "Sofia Sans Condensed", "Inter", sans-serif';
+                var textStr = 'RECENT WORKS';
+                var chars = textStr.split('');
+
+                /* Measure each character's exact advance width */
+                var charWidths = [];
+                var totalWidth = 0;
+                for (var i = 0; i < chars.length; i++) {
+                    var ch = chars[i];
+                    if (ch === ' ') {
+                        var spW = matterFontPx * 0.36;
+                        charWidths.push(spW);
+                        totalWidth += spW;
+                    } else {
+                        var w0 = measureCtx.measureText(textStr.slice(0, i)).width;
+                        var w1 = measureCtx.measureText(textStr.slice(0, i + 1)).width;
+                        var cw = Math.max(10, (w1 - w0) + tracking);
+                        charWidths.push(cw);
+                        totalWidth += cw;
+                    }
+                }
+
+                matterEngine = Engine.create({
+                    positionIterations: 8,
+                    velocityIterations: 6
+                });
+                matterEngine.gravity.y = 1.65; // Slower, gentler falling speed
+
+                var wallThick = 40;
+                var floorThick = Math.max(20, 0.14 * matterBoxH);
+                var bottomPadPx = Math.round(window.innerHeight * 0.035); // Bottom breathing room (~3.5vh)
+                matterFloor = Bodies.rectangle(v / 2, m - bottomPadPx + floorThick / 2, v * 2, floorThick, {
+                    isStatic: true,
+                    restitution: 0,
+                    friction: 1.0,
+                    frictionStatic: 1.0
+                });
+                matterTopWall = Bodies.rectangle(v / 2, -wallThick / 2, v * 2, wallThick, {
+                    isStatic: true,
+                    restitution: 0.2
+                });
+                matterLeftWall = Bodies.rectangle(-wallThick / 2, m / 2, wallThick, m * 3, {
+                    isStatic: true,
+                    restitution: 0.3
+                });
+                matterRightWall = Bodies.rectangle(v + wallThick / 2, m / 2, wallThick, m * 3, {
+                    isStatic: true,
+                    restitution: 0.3
+                });
+                World.add(matterEngine.world, [matterFloor, matterTopWall, matterLeftWall, matterRightWall]);
+
+                matterCharBodies = [];
+                matterHomePos = [];
+                var cursorX = (v - totalWidth) * 0.5;
+                var startY = Math.max(matterBoxH * 0.58, m * 0.25);
+
+                for (var c = 0; c < chars.length; c++) {
+                    var chStr = chars[c];
+                    var bw = charWidths[c];
+                    if (chStr === ' ') {
+                        cursorX += bw;
+                        continue;
+                    }
+                    var cx = cursorX + bw * 0.5;
+                    var cy = startY;
+                    /* Tight collision box width (0.94 * bw) so tighter-spaced letters don't pre-penetrate */
+                    var body = Bodies.rectangle(cx, cy, Math.max(8, bw * 0.94), matterBoxH * 0.78, {
+                        restitution: 0.2,
+                        friction: 0.04,
+                        frictionAir: 0.032,
+                        density: 0.0005
+                    });
+                    body.customChar = chStr;
+                    body.customColor = '#ffffff';
+                    Body.setStatic(body, true);
+                    World.add(matterEngine.world, body);
+                    matterCharBodies.push(body);
+                    matterHomePos.push({ x: cx, y: cy });
+                    cursorX += bw;
+                }
+
+                matterRunner = Runner.create();
+                Runner.run(matterRunner, matterEngine);
+
+                if (rwDropped) {
+                    triggerMatterDrop();
+                }
+            }
+
+            function triggerMatterDrop() {
+                if (!window.Matter || !matterCharBodies.length) return;
+                var Body = Matter.Body;
+                rwDropped = true;
+                rwReturning = false;
+                for (var i = 0; i < matterCharBodies.length; i++) {
+                    var b = matterCharBodies[i];
+                    var home = matterHomePos[i];
+                    if (!b.isStatic) Body.setStatic(b, true);
+                    Body.setPosition(b, { x: home.x, y: home.y });
+                    Body.setAngle(b, 0);
+                    Body.setVelocity(b, { x: 0, y: 0 });
+                    Body.setAngularVelocity(b, 0);
+                }
+                setTimeout(function () {
+                    if (!rwDropped) return;
+                    for (var j = 0; j < matterCharBodies.length; j++) {
+                        var body = matterCharBodies[j];
+                        if (body.isStatic) Body.setStatic(body, false);
+                        var fx = 0.004 * (Math.random() - 0.5);
+                        var fy = 0.002 * Math.random();
+                        Body.applyForce(body, body.position, { x: fx, y: fy });
+                    }
+                }, 40);
+            }
+
+            function triggerMatterReturn() {
+                if (!window.Matter || !matterCharBodies.length) return;
+                var Body = Matter.Body;
+                rwDropped = false;
+                rwReturning = true;
+                for (var i = 0; i < matterCharBodies.length; i++) {
+                    var b = matterCharBodies[i];
+                    if (!b.isStatic) Body.setStatic(b, true);
+                    Body.setVelocity(b, { x: 0, y: 0 });
+                    Body.setAngularVelocity(b, 0);
+                }
+            }
+
+            /* Exact Olha Lazarieva mousemove repulsion (`se` handler in `qR`):
+               When cursor comes within `ae` (130px desktop / 80px mobile) of any non-static letter body,
+               applies radial impulse `B * (1 - dist / ae)` so letters fly & tumble away! */
+            window.addEventListener('mousemove', function (e) {
+                if (!rwDropped || !window.Matter || !matterCharBodies.length || !rwCanvas) return;
+                var rect = rwCanvas.getBoundingClientRect();
+                if (e.clientY < rect.top - 90 || e.clientY > rect.bottom + 90) return;
+
+                var localX = e.clientX - rect.left;
+                var localY = e.clientY - rect.top;
+                var radius = window.innerWidth > 768 ? 130 : 80;
+                var radiusSq = radius * radius;
+                var forceMag = window.innerWidth > 768 ? 0.065 : 0.03;
+
+                for (var i = 0; i < matterCharBodies.length; i++) {
+                    var b = matterCharBodies[i];
+                    if (!b.isStatic) {
+                        var dx = b.position.x - localX;
+                        var dy = b.position.y - localY;
+                        var distSq = dx * dx + dy * dy;
+                        if (distSq < radiusSq) {
+                            var dist = Math.sqrt(distSq) || 1;
+                            var strength = forceMag * (1 - dist / radius);
+                            Matter.Body.applyForce(b, b.position, {
+                                x: (dx / dist) * strength,
+                                y: (dy / dist) * strength
+                            });
+                        }
+                    }
+                }
+            }, { passive: true });
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(function () {
+                    initRecentWorksMatter();
+                });
+            } else {
+                setTimeout(initRecentWorksMatter, 150);
+            }
+            window.addEventListener('resize', function () {
+                initRecentWorksMatter();
+            });
+            var projTagEl = document.getElementById('room-project-tag');
+            var projTitleEl = document.getElementById('room-project-title');
+            var counterEl = document.getElementById('room-counter');
+            var viewCaseEl = document.getElementById('room-view-case');
+            var statsOverlay = document.getElementById('room-stats-overlay');
+            var tocItems = Array.prototype.slice.call(document.querySelectorAll('.toc-item'));
+            var topNavItems = Array.prototype.slice.call(document.querySelectorAll('.grid-nav-item[data-goto]'));
+            var gotoButtons = Array.prototype.slice.call(document.querySelectorAll('[data-goto]'));
+            var introOverlay = document.getElementById('intro');
+
+            var TOTAL_SECTORS = 4;
+            var currentSector = 0;
+            var isLocked = false;
+            var LOCK_MS = 1050;
+
+            /* Manual Scrub Progress between Sector 0 (Main Hero = 0.0) and Sector 1 (Exhibition Room = 1.0) */
+            var entryProgress = 0.0;
+            var targetEntryProgress = 0.0;
+
+            function isIntroActive() {
+                return introOverlay && !introOverlay.classList.contains('hidden');
+            }
+
+            function syncUIForSector(sec) {
+                currentSector = sec;
+
+                if (sec === 0) {
+                    document.body.setAttribute('data-theme', 'light');
+                } else {
+                    document.body.setAttribute('data-theme', 'dark');
+                }
+
+                /* Floor HUD (Sector 1 = DevPanda, Sector 2 = FolioSquad) */
+                if (sec === 1 || sec === 2) {
+                    var pd = projectsData[sec];
+                    if (projTagEl) projTagEl.textContent = pd.tag;
+                    if (projTitleEl) projTitleEl.textContent = pd.title;
+                    if (counterEl) counterEl.textContent = pd.counter;
+                    if (viewCaseEl) {
+                        viewCaseEl.href = pd.url;
+                        viewCaseEl.textContent = pd.cta;
+                    }
+                    if (floorHud) floorHud.classList.add('is-visible');
+                } else {
+                    if (floorHud) floorHud.classList.remove('is-visible');
+                }
+
+                /* Sector 3: Likes & Stats Overlay */
+                if (sec === 3) {
+                    if (statsOverlay) statsOverlay.classList.add('is-visible');
+                } else {
+                    if (statsOverlay) statsOverlay.classList.remove('is-visible');
+                }
+
+                /* Update Right TOC & Top Grid Nav */
+                tocItems.forEach(function (item, i) {
+                    if (i === sec) {
+                        item.classList.add('is-active');
+                        item.setAttribute('aria-current', 'step');
+                    } else {
+                        item.classList.remove('is-active');
+                        item.removeAttribute('aria-current');
+                    }
+                });
+
+                topNavItems.forEach(function (btn) {
+                    var g = parseInt(btn.getAttribute('data-goto'), 10);
+                    if (g === sec) {
+                        btn.classList.add('is-active');
+                    } else {
+                        btn.classList.remove('is-active');
+                    }
+                });
+            }
+
+            function goToSector(idx, force) {
+                var next = Math.max(0, Math.min(TOTAL_SECTORS - 1, Number(idx)));
+                if (next === currentSector && !force) return;
+                if (isLocked && !force) return;
+
+                isLocked = true;
+                targetEntryProgress = (next === 0) ? 0.0 : 1.0;
+
+                /* Target 3D Stage Pose */
+                var kf = sectorKeyframes[next] || sectorKeyframes[0];
+                targetStageRotX = kf.rotX;
+                targetStageRotY = kf.rotY;
+                targetFogNear = kf.fogNear;
+                targetFogFar = kf.fogFar;
+
+                syncUIForSector(next);
+
+                setTimeout(function () {
+                    isLocked = false;
+                }, LOCK_MS);
+            }
+
+            window.goToSector = goToSector;
+
+            /* Wheel Listener:
+               - Between Sector 0 (Main Hero) <-> Sector 1 (Exhibition Room): Manual scrub proportional to wheel deltaY (NO auto-scroll!)
+               - Inside Exhibition Room (Sector 1 <-> Sector 2 <-> Sector 3): One-scroll 90° viewpoint rotation
+            */
+            var lastWheelTs = 0;
+            window.addEventListener('wheel', function (e) {
+                if (isIntroActive()) return;
+                e.preventDefault();
+
+                var dy = e.deltaY;
+                if (Math.abs(dy) < 1) return;
+
+                /* Case A: Manual Scrubbing between Main Hero (0.0) and Exhibition Room 1/2 (1.0) */
+                if (
+                    currentSector === 0 ||
+                    (currentSector === 1 && targetEntryProgress < 1.0) ||
+                    (currentSector === 1 && dy < 0)
+                ) {
+                    if ( isLocked ) return;
+                    /* Approximately 1550px of wheel scroll to scrub from Main Hero -> RECENT WORKS Banner -> Exhibition Floor */
+                    var step = dy / 1550;
+                    targetEntryProgress = Math.max(0.0, Math.min(1.0, targetEntryProgress + step));
+
+                    /* Scrub 3D ceiling-drop angle (1.5 -> 0.0) and fog starting as RECENT WORKS banner enters */
+                    var roomProg = Math.max(0.0, Math.min(1.0, (targetEntryProgress - 0.18) / 0.82));
+                    targetStageRotX = 1.5 * (1.0 - roomProg);
+                    targetStageRotY = 0.0;
+                    targetFogNear = 0.01 + (2.5 - 0.01) * roomProg;
+                    targetFogFar = 2.7 + (3.0 - 2.7) * roomProg;
+
+                    if (targetEntryProgress >= 0.96) {
+                        if (currentSector !== 1) {
+                            syncUIForSector(1);
+                            lastWheelTs = performance.now();
+                        }
+                    } else {
+                        if (currentSector !== 0) {
+                            syncUIForSector(0);
+                        }
+                        /* Header theme flips to dark as soon as Main Hero curtain slides past top bar */
+                        if (targetEntryProgress > 0.45) {
+                            document.body.setAttribute('data-theme', 'dark');
+                        } else {
+                            document.body.setAttribute('data-theme', 'light');
+                        }
+                        if (floorHud) {
+                            if (targetEntryProgress > 0.82) {
+                                var pd1 = projectsData[1];
+                                if (projTagEl) projTagEl.textContent = pd1.tag;
+                                if (projTitleEl) projTitleEl.textContent = pd1.title;
+                                if (counterEl) counterEl.textContent = pd1.counter;
+                                if (viewCaseEl) {
+                                    viewCaseEl.href = pd1.url;
+                                    viewCaseEl.textContent = pd1.cta;
+                                }
+                                floorHud.classList.add('is-visible');
+                            } else {
+                                floorHud.classList.remove('is-visible');
+                            }
+                        }
+                    }
+                    return;
+                }
+
+                /* Case B: One-scroll 90° viewpoint turns inside Exhibition Room (Sector 1 -> 2 -> 3) */
+                var now = performance.now();
+                if (isLocked || (now - lastWheelTs < LOCK_MS)) return;
+                if (Math.abs(dy) < 16) return;
+
+                lastWheelTs = now;
+                if (dy > 0) {
+                    goToSector(currentSector + 1);
+                } else if (dy < 0) {
+                    goToSector(currentSector - 1);
+                }
+            }, { passive: false });
+
+            /* Touch Swipe Listener */
+            var touchStartY = null;
+            window.addEventListener('touchstart', function (e) {
+                if (isIntroActive() || !e.touches || !e.touches.length) return;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            window.addEventListener('touchend', function (e) {
+                if (isIntroActive() || touchStartY === null || !e.changedTouches || !e.changedTouches.length) return;
+                var dy = touchStartY - e.changedTouches[0].clientY;
+                touchStartY = null;
+                if (Math.abs(dy) < 42) return;
+                if (dy > 0) goToSector(currentSector + 1);
+                else goToSector(currentSector - 1);
+            }, { passive: true });
+
+            /* Keyboard Listener */
+            window.addEventListener('keydown', function (e) {
+                if (isIntroActive()) return;
+                if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                    e.preventDefault();
+                    goToSector(currentSector + 1);
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    goToSector(currentSector - 1);
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    goToSector(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    goToSector(TOTAL_SECTORS - 1);
+                }
+            });
+
+            /* [data-goto] Click Listener */
+            gotoButtons.forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var idx = parseInt(btn.getAttribute('data-goto'), 10);
+                    if (!isNaN(idx)) {
+                        goToSector(idx, true);
+                    }
+                });
+            });
+
+            /* ── Render Loop with Reference Camera Parallax & Wing Cross-Fade on 90° Rotation ── */
+            function animateRoom() {
+                var damp = 0.085;
+                entryProgress += (targetEntryProgress - entryProgress) * damp;
+                stageRotX += (targetStageRotX - stageRotX) * damp;
+                stageRotY += (targetStageRotY - stageRotY) * damp;
+
+                /* 1) Thickest bottom black stripe (.s-4) expands from 42px up to 34vh as user scrolls */
+                var expandProg = Math.max(0.0, Math.min(1.0, entryProgress / 0.35));
+                var bannerVh = 4.5 + expandProg * 29.5; // 4.5vh (~42px) -> 34vh compact height!
+                if (expandingStripe4) {
+                    expandingStripe4.style.height = bannerVh.toFixed(2) + 'vh';
+                }
+                if (recentWorksInner) {
+                    var innerAlpha = Math.max(0.0, Math.min(1.0, (entryProgress - 0.08) / 0.18));
+                    recentWorksInner.style.opacity = innerAlpha.toFixed(3);
+                }
+
+                /* 2) Olha Section 2 (`qR`) Matter.js Gravity Trigger + Dynamic Floor + Mouse Repulsion:
+                      - While scrolling down initially (entryProgress < 0.29), letters stay static in mid-air.
+                      - Right as the Exhibition Room starts to appear below the black stripe (entryProgress >= 0.29),
+                        `triggerMatterDrop()` releases all letter bodies into Matter.js 2D rigid-body physics!
+                      - Touching them with the mouse cursor blasts & tumbles the letters across the banner.
+                      - Scrolling back up above 0.18 smoothly lerps them back to their original upright positions. */
+                if (!rwDropped && entryProgress >= 0.29) {
+                    triggerMatterDrop();
+                } else if (rwDropped && entryProgress < 0.18) {
+                    triggerMatterReturn();
+                }
+
+                if (matterEngine && matterCtx && rwCanvas) {
+                    var currentBannerPx = (bannerVh / 100) * window.innerHeight;
+                    var floorThickPx = Math.max(20, 0.14 * matterBoxH);
+                    var bottomPadPx = Math.round(window.innerHeight * 0.035);
+                    if (matterFloor && window.Matter) {
+                        Matter.Body.setPosition(matterFloor, {
+                            x: window.innerWidth * 0.5,
+                            y: currentBannerPx - bottomPadPx + floorThickPx * 0.5
+                        });
+                    }
+
+                    if (rwReturning && window.Matter) {
+                        var allHome = true;
+                        for (var r = 0; r < matterCharBodies.length; r++) {
+                            var rb = matterCharBodies[r];
+                            var target = matterHomePos[r];
+                            var nx = rb.position.x + (target.x - rb.position.x) * 0.18;
+                            var ny = rb.position.y + (target.y - rb.position.y) * 0.18;
+                            var na = rb.angle + (0 - rb.angle) * 0.18;
+                            Matter.Body.setPosition(rb, { x: nx, y: ny });
+                            Matter.Body.setAngle(rb, na);
+                            if (Math.abs(nx - target.x) > 0.3 || Math.abs(ny - target.y) > 0.3 || Math.abs(na) > 0.005) {
+                                allHome = false;
+                            }
+                        }
+                        if (allHome) {
+                            for (var hIdx = 0; hIdx < matterCharBodies.length; hIdx++) {
+                                Matter.Body.setPosition(matterCharBodies[hIdx], matterHomePos[hIdx]);
+                                Matter.Body.setAngle(matterCharBodies[hIdx], 0);
+                            }
+                            rwReturning = false;
+                        }
+                    }
+
+                    /* Custom afterRender canvas text pass (exact Olha `te` function) */
+                    matterCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                    matterCtx.font = '900 ' + matterFontPx + 'px "Sofia Sans Condensed", "Inter", sans-serif';
+                    matterCtx.textAlign = 'center';
+                    matterCtx.textBaseline = 'middle';
+                    for (var dIdx = 0; dIdx < matterCharBodies.length; dIdx++) {
+                        var cb = matterCharBodies[dIdx];
+                        matterCtx.save();
+                        matterCtx.translate(cb.position.x, cb.position.y);
+                        matterCtx.rotate(cb.angle);
+                        matterCtx.fillStyle = cb.customColor || '#ffffff';
+                        matterCtx.fillText(cb.customChar, 0, 0);
+                        matterCtx.restore();
+                    }
+                }
+
+                /* 3) Move Main Hero (#sector-0, including its expanding bottom stripe) up to reveal 3D Exhibition Room */
+                var totalSlideVh = entryProgress * 136;
+                if (cappenSection) {
+                    cappenSection.style.transform = 'translate3d(0, ' + (-totalSlideVh).toFixed(3) + 'vh, 0)';
+                    cappenSection.style.pointerEvents = entryProgress > 0.25 ? 'none' : 'auto';
+                }
+
+                scene.fog.near += (targetFogNear - scene.fog.near) * damp;
+                scene.fog.far += (targetFogFar - scene.fog.far) * damp;
+
+                masterStage.rotation.x = stageRotX;
+                masterStage.rotation.y = stageRotY;
+
+                /* Smoothly cross-fade adjacent wings during 90° turn so side walls never intersect */
+                for (var i = 0; i < wings.length; i++) {
+                    var w = wings[i];
+                    var expectedStageY = -w.yaw; // 0, +PI/2, +PI
+                    var angularDist = Math.abs(stageRotY - expectedStageY);
+                    /* Full opacity when facing wing, smoothly fades out past 45°~75° so walls don't overlap */
+                    var weight = Math.max(0, Math.min(1, 1.0 - (angularDist / (Math.PI * 0.48))));
+                    w.group.visible = weight > 0.01;
+                    if (w.group.visible) {
+                        for (var m = 0; m < w.roomMats.length; m++) {
+                            w.roomMats[m].opacity = weight;
+                            w.roomMats[m].depthWrite = weight > 0.5;
+                        }
+                        if (w.screenMat) w.screenMat.opacity = weight;
+                        if (w.beamMat) w.beamMat.opacity = 0.1 * weight;
+                    }
+                }
+
+                /* Exact camera parallax from Olha Lazarieva's HR() component:
+                   e.position.x += 0.05 * (0.1 * mouse.x - e.position.x)
+                   e.position.y += 0.05 * (0.1 * mouse.y - e.position.y)
+                   e.lookAt(0, 0, 0)
+                */
+                camera.position.x += 0.05 * (0.1 * mouseOffset.x - camera.position.x);
+                camera.position.y += 0.05 * (0.1 * mouseOffset.y - camera.position.y);
+                camera.lookAt(0, 0, 0);
+
+                renderer.render(scene, camera);
+                requestAnimationFrame(animateRoom);
+            }
+            requestAnimationFrame(animateRoom);
         })();
     </script>
 
